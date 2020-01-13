@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoFramework", "AutoFramework\AutoFramework.csproj", "{19836B04-58F8-4992-BE8C-BE97173B363D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomationPracticeTests", "AutomationPracticeTests\AutomationPracticeTests.csproj", "{F9948AD0-244B-4F18-B5D8-5298B6BE72E6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{19836B04-58F8-4992-BE8C-BE97173B363D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19836B04-58F8-4992-BE8C-BE97173B363D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19836B04-58F8-4992-BE8C-BE97173B363D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19836B04-58F8-4992-BE8C-BE97173B363D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9948AD0-244B-4F18-B5D8-5298B6BE72E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9948AD0-244B-4F18-B5D8-5298B6BE72E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9948AD0-244B-4F18-B5D8-5298B6BE72E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9948AD0-244B-4F18-B5D8-5298B6BE72E6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {99183EAE-6233-4B87-B2DE-FDE4CE99A7B2}
+	EndGlobalSection
+EndGlobal
