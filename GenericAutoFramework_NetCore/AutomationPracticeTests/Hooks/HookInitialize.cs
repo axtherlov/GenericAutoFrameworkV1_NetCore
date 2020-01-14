@@ -10,7 +10,17 @@ namespace AutomationPracticeTests.Hooks
     [Binding]
     public class HookInitialize : TestInitializeHook
     {
-        private readonly ParallelConfig _parallelConfig;
+        /*  [BeforeTestRun]
+            [BeforeFeature]
+            [BeforeScenario]
+            [BeforeScenarioBlock]
+            [BeforeStep]
+            [AfterStep]
+            [AfterScenarioBlock]
+            [AfterScenario]
+            [AfterFeature]
+            [AfterTestRun] */
+
         private readonly FeatureContext _featureContext;
         private readonly ScenarioContext _scenarioContext;
         private ExtentTest _currentScenarioName; // should not be static otherwise scenario steps will overstep each other in case of parallel testing
@@ -20,26 +30,11 @@ namespace AutomationPracticeTests.Hooks
         
         private static ExtentKlovReporter klov;
 
-        public HookInitialize(ParallelConfig parallelConfig, FeatureContext featureContext, ScenarioContext scenarioContext)
-            : base(parallelConfig)
+        public HookInitialize(DriverContext driverContext, FeatureContext featureContext, ScenarioContext scenarioContext)
+            : base(driverContext)
         {
-            _parallelConfig = parallelConfig;
             _featureContext = featureContext;
             _scenarioContext = scenarioContext;
-        }
-
-        //[BeforeFeature]
-        //public void BeforeFeature()
-        //{
-        //    //featureName = extentReport.CreateTest<Feature>(_featureContext.FeatureInfo.Title);
-        //}
-
-        [BeforeScenario]
-        public void BeforeScenario()
-        {
-            InitializeSettings();
-            featureName = extentReport.CreateTest<Feature>(_featureContext.FeatureInfo.Title);
-            _currentScenarioName = featureName.CreateNode<Scenario>(_scenarioContext.ScenarioInfo.Title);
         }
 
         [BeforeTestRun]
@@ -54,6 +49,22 @@ namespace AutomationPracticeTests.Hooks
             klov = new ExtentKlovReporter();
             extentReport.AttachReporter(htmlreporter);
         }
+
+        //[BeforeFeature]
+        //public void BeforeFeature()
+        //{
+        //    featureName = extentReport.CreateTest<Feature>(_featureContext.FeatureInfo.Title);
+        //}
+
+        [BeforeScenario]
+        public void BeforeScenario()
+        {
+            InitializeSettings();
+            featureName = extentReport.CreateTest<Feature>(_featureContext.FeatureInfo.Title);
+            _currentScenarioName = featureName.CreateNode<Scenario>(_scenarioContext.ScenarioInfo.Title);
+        }
+
+    
 
         [AfterTestRun]
         public static void TestEnd()
@@ -102,7 +113,7 @@ namespace AutomationPracticeTests.Hooks
         [AfterScenario()]
         public void AfterScenario()
         {
-            _parallelConfig.Driver.Quit();
+            CloseBrowser();
             extentReport.Flush(); //create report
         }
     }

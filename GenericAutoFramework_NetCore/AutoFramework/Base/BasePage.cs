@@ -2,8 +2,9 @@
 {
     public abstract class BasePage : Base
     {
-        protected BasePage(ParallelConfig parallelConfig) 
-            : base(parallelConfig)
+
+        protected BasePage(DriverContext driverContext) 
+            : base(driverContext)
         {
         }
     }

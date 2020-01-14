@@ -129,7 +129,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line hidden
                 TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                             "SubjectHeading",
-                            "EmailAddress",
+                            "Email",
                             "OrderReference",
                             "Product",
                             "Message"});
@@ -140,10 +140,14 @@ this.ScenarioInitialize(scenarioInfo);
                             "Printed Dress - Color : Orange, Size : S",
                             "I need help with this product"});
 #line 15
- testRunner.Then("I Fill the contactUs form for customer service", ((string)(null)), table4, "Then ");
+ testRunner.When("I fill the contactUs form for customer service", ((string)(null)), table4, "When ");
 #line hidden
 #line 18
  testRunner.And("I click Send button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 19
+ testRunner.Then("I should see the message Your message has been successfully sent to our team. dis" +
+                        "played", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

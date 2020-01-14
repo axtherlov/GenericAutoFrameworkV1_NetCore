@@ -12,7 +12,8 @@ Scenario: Create message for customer service
 	| daniel.terceros@test.com | Password1$ |
 	Then I click login button
 	And I click ContactUs link
-	Then I Fill the contactUs form for customer service
-	| SubjectHeading  | EmailAddress             | OrderReference         | Product                                  | Message |
+	When I fill the contactUs form for customer service
+	| SubjectHeading   | Email                    | OrderReference         | Product                                  | Message                       |
 	| Customer service | daniel.terceros@test.com | ENXYOZNNS - 08/02/2019 | Printed Dress - Color : Orange, Size : S | I need help with this product |
 	And I click Send button
+	Then I should see the message Your message has been successfully sent to our team. displayed

@@ -6,27 +6,18 @@ namespace AutomationPracticeTests.Pages
 {
     public class ContactUsPage : MenuPage
     {
-        public ContactUsPage(ParallelConfig parallelConfig)
-            : base(parallelConfig)
+        private IWebElement _subjectHeadingDropdown => driverContext.Driver.FindElement(By.Id("id_contact"));
+        private IWebElement _emailInput => driverContext.Driver.FindElement(By.Id("email"));
+        private IWebElement _orderReferenceDropDown => driverContext.Driver.FindElement(By.Name("id_order"));
+        private IWebElement _productDropDown => driverContext.Driver.FindElement(By.Name("id_product"));
+        private IWebElement _messageInput => driverContext.Driver.FindElement(By.Id("message"));
+        private IWebElement _sendButton => driverContext.Driver.FindElement(By.Id("submitMessage"));
+        private IWebElement _messageSendText => driverContext.Driver.FindElement(By.XPath("//p[@class='alert alert-success']"));
+
+        public ContactUsPage(DriverContext driverContext)
+            : base(driverContext)
         {
         }
-        //[FindsBy(How = How.Id, Using = "id_contact")]
-        private IWebElement _subjectHeadingDropdown => parallelConfig.Driver.FindElement(By.Id("id_contact"));
-
-        //[FindsBy(How = How.Id, Using = "email")]
-        private IWebElement _emailInput => parallelConfig.Driver.FindElement(By.Id("email"));
-
-        //[FindsBy(How = How.Name, Using = "id_order")]
-        private IWebElement _orderReferenceDropDown => parallelConfig.Driver.FindElement(By.Id("id_order"));
-        
-        //[FindsBy(How = How.Name, Using = "id_product")]
-        private IWebElement _productDropDown => parallelConfig.Driver.FindElement(By.Id("id_product"));
-
-        //FindsBy(How = How.Id, Using = "message")]
-        private IWebElement _messageInput => parallelConfig.Driver.FindElement(By.Id("message"));
-
-        //[FindsBy(How = How.Id, Using = "submitMessage")]
-        private IWebElement _sendButton => parallelConfig.Driver.FindElement(By.Id("submitMessage"));
 
         public void FillContactForm(string subjectHeading, string email, string orderReference, string product, string message)
         {
@@ -38,9 +29,12 @@ namespace AutomationPracticeTests.Pages
             _messageInput.SendKeys(message);
         }
 
-        internal void ClickSendButton()
+        public void ClickSendButton()
         {
             _sendButton.Click();
         }
+
+        public string GetMessageSendText() => _messageSendText.Text;
+
     }
 }

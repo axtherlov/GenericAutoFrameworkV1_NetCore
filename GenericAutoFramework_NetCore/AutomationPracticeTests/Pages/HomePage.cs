@@ -4,8 +4,8 @@ namespace AutomationPracticeTests.Pages
 {
     public class HomePage : MenuPage
     {
-        public HomePage(ParallelConfig parallelConfig) 
-            : base(parallelConfig)
+        public HomePage(DriverContext driver) 
+            : base(driver)
         {
         }
     }

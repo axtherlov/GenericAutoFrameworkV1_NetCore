@@ -1,6 +1,4 @@
 ﻿using AutoFramework.Base;
-using AutoFramework.Config;
-using AutoFramework.Helpers;
 using AutomationPracticeTests.Pages;
 using TechTalk.SpecFlow;
 
@@ -9,42 +7,64 @@ namespace AutomationPracticeTests.Steps
     [Binding]
     public class ExtendedSteps : BaseStep
     {
-        public ExtendedSteps(ParallelConfig parallelConfig) 
-            : base(parallelConfig)
+        public ExtendedSteps(DriverContext driverContext) 
+            : base(driverContext)
         {
-        }
-
-        public virtual void NavigateSite()
-        {
-            //parallelConfig..Browser.GoToUrl(Settings.AUT);
-            parallelConfig.Driver.Navigate().GoToUrl(Settings.AUT);
-            LogHelpers.Write($"Navigated to {Settings.AUT}");
         }
 
         [Given(@"I have navigated to the application")]
         public void GivenIHaveNavigatedToTheApplication()
         {
-            NavigateSite();
-            //CurrentPage = GetInstance<HomePage>();
-            parallelConfig.CurrentPage = new HomePage(parallelConfig);
+            NavigateToInitialSite();
+            driverContext.CurrentPage = new HomePage(driverContext);
         }
 
         [Then(@"I click (.*) link")]
         public void ThenIClickLink(string linkName)
         {
-            if(linkName == "login")
-                parallelConfig.CurrentPage = parallelConfig.CurrentPage.As<HomePage>().ClickSignButton();
-            else if(linkName== "ContactUs")
-                parallelConfig.CurrentPage = parallelConfig.CurrentPage.As<HomePage>().ClickContactUsButton();
+            if (linkName == "login")
+            {
+                driverContext.CurrentPage = driverContext.CurrentPage.As<HomePage>().ClickSignButton();
+            }
+            else if (linkName == "ContactUs")
+            {
+                driverContext.CurrentPage = driverContext.CurrentPage.As<HomePage>().ClickContactUsButton();
+            }
+            else if (linkName == "AccountName")
+            {
+                driverContext.CurrentPage = driverContext.CurrentPage.As<HomePage>().ClickAccountLink();
+            }
+            else if (linkName == "MyAddresses")
+            {
+                driverContext.CurrentPage = driverContext.CurrentPage.As<AccountPage>().ClickMyAddressesLink();
+            }
+            else if (linkName == "AddNewAddress")
+            {
+                driverContext.CurrentPage.As<MyAddresses>().ClickAddNewAddressLink();
+            }
         }
 
         [Then(@"I click (.*) button")]
         public void ThenIClickButton(string buttonName)
         {
-            if(buttonName=="login")
-                parallelConfig.CurrentPage = parallelConfig.CurrentPage.As<LoginPage>().ClickLoginButton();
+            if (buttonName == "login")
+            {
+                driverContext.CurrentPage = driverContext.CurrentPage.As<LoginPage>().ClickLoginButton();
+            }
             if (buttonName == "Send")
-                parallelConfig.CurrentPage.As<ContactUsPage>().ClickSendButton();
+            {
+                driverContext.CurrentPage.As<ContactUsPage>().ClickSendButton();
+            }
         }
+
+        [When(@"I click (.*) button")]
+        public void WhenIClickSendButton(string buttonName)
+        {
+            if (buttonName == "Save")
+            {
+                driverContext.CurrentPage.As<MyAddresses>().ClickSaveAddress();
+            }
+        }
+
     }
 }

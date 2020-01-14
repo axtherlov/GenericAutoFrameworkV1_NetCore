@@ -28,7 +28,7 @@ namespace AutomationPracticeTests.Features
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "Acount.feature"
+#line 1 "Account.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
@@ -88,7 +88,7 @@ namespace AutomationPracticeTests.Features
                     "smoke"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create new address", null, new string[] {
                         "smoke"});
-#line 9
+#line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -111,13 +111,13 @@ this.ScenarioInitialize(scenarioInfo);
 #line 4
 this.FeatureBackground();
 #line hidden
-#line 10
+#line 9
  testRunner.Given("I have navigated to the application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 11
+#line 10
  testRunner.And("I see the application opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 12
+#line 11
  testRunner.Then("I click login link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -126,35 +126,47 @@ this.FeatureBackground();
                 table1.AddRow(new string[] {
                             "daniel.terceros@test.com",
                             "Password1$"});
-#line 13
+#line 12
  testRunner.When("I enter the username and password", ((string)(null)), table1, "When ");
 #line hidden
-#line 16
+#line 15
  testRunner.Then("I click login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
+#line 16
+ testRunner.And("I click AccountName link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
 #line 17
- testRunner.And("I click AcountName link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I click MyAddresses link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 18
- testRunner.And("I click MyAddresses button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I click AddNewAddress link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                            "SubjectHeading",
-                            "EmailAddress",
-                            "OrderReference",
-                            "Product",
-                            "Message"});
+                            "FirstName",
+                            "LastName",
+                            "Address",
+                            "City",
+                            "State",
+                            "PostalCode",
+                            "MobilePhone",
+                            "Alias"});
                 table2.AddRow(new string[] {
-                            "CustomerService",
-                            "daniel.terceros@test.com",
-                            "ENXYOZNNS - 08/02/2019",
-                            "Printed Dress - Color : Orange, Size : S",
-                            "I need help with this product"});
+                            "Daniel",
+                            "Terceros",
+                            "123 Street",
+                            "TestCity",
+                            "Alabama",
+                            "12345",
+                            "701234147",
+                            "MyAddress"});
 #line 19
- testRunner.Then("I Fill the contactUs form for customer service", ((string)(null)), table2, "Then ");
+ testRunner.When("I Fill the create address form", ((string)(null)), table2, "When ");
 #line hidden
 #line 22
- testRunner.And("I click Send button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I click Save button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 23
+ testRunner.Then("I should see the address header MyAddress displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

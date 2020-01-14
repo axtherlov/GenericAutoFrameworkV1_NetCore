@@ -1,19 +1,16 @@
-﻿namespace AutoFramework.Base
+﻿using OpenQA.Selenium;
+
+namespace AutoFramework.Base
 {
     public class DriverContext
     {
-        private readonly ParallelConfig _parallelConfig;
-
-        public static Browser Browser { get; set; }
-
-        public DriverContext(ParallelConfig parallelConfig)
-        {
-            _parallelConfig = parallelConfig;
-        }
+        public IWebDriver Driver { get; set; }
         
+        public BasePage CurrentPage { get; set; }
+
         public void GoToUrl(string url)
         {
-            _parallelConfig.Driver.Url = url;
+            Driver.Url = url;
         }
     }
 }

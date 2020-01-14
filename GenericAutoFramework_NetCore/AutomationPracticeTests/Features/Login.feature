@@ -15,4 +15,4 @@ Scenario: Check Login with correct username and password
 	| Username                 | Password   |
 	| daniel.terceros@test.com | Password1$ |
 	Then I click login button
-	Then I should see the home page with user logged
+	Then I should see the home page with user Daniel Terceros logged
