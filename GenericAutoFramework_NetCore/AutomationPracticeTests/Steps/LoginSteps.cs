@@ -6,32 +6,68 @@ using TechTalk.SpecFlow.Assist;
 
 namespace AutomationPracticeTests.Steps
 {
-    [Binding]
-    public sealed class LoginSteps : BaseStep
+    [Binding, Scope(Feature = "Login")]
+    public sealed class LoginSteps : MenuSteps
     {
         public LoginSteps(DriverContext driverContext)
             : base(driverContext)
         {
         }
 
-        [Given(@"I see the application opened")]
-        public void GivenISeeTheApplicationOpened()
+        #region Given
+
+        [Given(@"I navigated to the login page")]
+        public void GivenINavigatedToTheLoginPage()
         {
-            driverContext.CurrentPage.As<HomePage>().CheckIfSignInExists();
+            NavigateToInitialSite();
+            driverContext.CurrentPage = new HomePage(driverContext);
+            driverContext.CurrentPage = driverContext.CurrentPage.As<HomePage>().ClickSignButton();
         }
-        
-        [When(@"I enter the username and password")]
-        public void WhenIEnterTheUsernameAndPassword(Table table)
+
+        #endregion
+
+        #region When
+
+        [When(@"I Try to login with valid credentials (.*) and (.*)")]
+        public void WhenITryToLoginWithTheCredentials(string username, string password)
+        {
+            driverContext.CurrentPage.As<LoginPage>().FillCredentials(username, password);
+            driverContext.CurrentPage.As<LoginPage>().ClickSignInButton();
+        }
+
+        [When(@"I try to login with invalid credentials")]
+        public void WhenITryToLoginWithInvalidCredentials(Table table)
         {
             dynamic data = table.CreateDynamicInstance();
-            driverContext.CurrentPage.As<LoginPage>().Login(data.Username, data.Password);
+            driverContext.CurrentPage.As<LoginPage>().FillCredentials(data.Username, data.Password);
+            driverContext.CurrentPage.As<LoginPage>().ClickSignInButton();
         }
-        
+
+        #endregion
+
+        #region Then
+
         [Then(@"I should see the home page with user (.*) logged")]
         public void ThenIShouldSeeTheHomePageWithUserLogged(string userLogged)
         {
-            var loggedUser = driverContext.CurrentPage.As<HomePage>().GetLoggerUser();
+            var loggedUser = driverContext.CurrentPage.As<MenuPage>().GetLoggedUser();
             Assert.AreEqual(userLogged, loggedUser);
         }
+
+        [Then(@"I should not login the application")]
+        public void ThenIShouldNotLoginTheApplication()
+        {
+            bool result = driverContext.CurrentPage.As<MenuPage>().LoggedUserIsNotVisible();
+            Assert.IsTrue(result);
+        }
+
+        [Then(@"I should see the message ""(.*)"" displayed")]
+        public void ThenIShouldSeeMessage(string message)
+        {
+            string expectedMessage = driverContext.CurrentPage.As<LoginPage>().GetErrorMessageText();
+            Assert.AreEqual(expectedMessage, message);
+        }
+
+        #endregion
     }
 }

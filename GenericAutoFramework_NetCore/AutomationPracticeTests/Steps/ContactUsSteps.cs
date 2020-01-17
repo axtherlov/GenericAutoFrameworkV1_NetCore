@@ -6,21 +6,19 @@ using TechTalk.SpecFlow.Assist;
 
 namespace AutomationPracticeTests.Steps
 {
-    [Binding]
-    public sealed class ContactUsSteps : BaseStep
-    {
+    [Binding, Scope(Feature = "Customer Service")]
+    public sealed class ContactUsSteps : MenuSteps
+    {       
         public ContactUsSteps(DriverContext driverContext)
             : base(driverContext)
         {
         }
 
-        //[Then(@"I fill the contactUs form for customer service")]
-        //public void ThenIShouldSeeMessageSendText(Table table)
-        //{
-        //    dynamic data = table.CreateDynamicInstance();
-        //    driverContext.CurrentPage.As<ContactUsPage>().FillContactForm(data.SubjectHeading, data.Email,
-        //        data.OrderReference, data.Product, data.Message);
-        //}
+        [Given(@"I navigated to ContactUs form")]
+        public void GivenINavigateToContactUsForm()
+        {
+            driverContext.CurrentPage = driverContext.CurrentPage.As<HomePage>().ClickContactUsButton();
+        }
 
         [When(@"I fill the contactUs form for customer service")]
         public void WhenIFillTheContactUsFormForCustomerService(Table table)
@@ -30,9 +28,13 @@ namespace AutomationPracticeTests.Steps
                 data.OrderReference, data.Product, data.Message);
         }
 
-
+        [Then(@"The customer service message should be sent")]
+        public void ThenTheCustomerServiceMessageShouldBeSent()
+        {
+            driverContext.CurrentPage.As<ContactUsPage>().ClickSendButton();
+        }
         
-        [Then(@"I should see the message (.*) displayed")]
+        [Then(@"I should see the message ""(.*)"" displayed")]
         public void ThenIShouldSeeMessageSendText(string expectedMessage)
         {
             var message = driverContext.CurrentPage.As<ContactUsPage>().GetMessageSendText();

@@ -1,18 +1,25 @@
 ﻿Feature: Login
-	Check if the login functionality is working
-	as expected with different permutations and
-	combinations of data
+	As a regular user, I want to have the ability to
+	log in in the application
 
-Background: 
-	#Given I Delete employee 'AutoUser' before I start running test
+#--------------------------------------------------------------------------------
+@smoke
+Scenario Outline:  Login with valid credentials
+	Given I navigated to the login page
+	When I Try to login with valid credentials <Username> and <Password>
+	Then I should see the home page with user <LoggedUser> logged
+	
+	Examples: 
+	| Testcase | Username                 | Password   | LoggedUser      |
+	| A        | daniel.terceros@test.com | Password1$ | Daniel Terceros |
+	| B        | danielt@test.com         | Password1$ | D Terceros      |
 
-@smoke @positive
-Scenario: Check Login with correct username and password
-	Given I have navigated to the application
-	And I see the application opened
-	Then I click login link
-	When I enter the username and password
-	| Username                 | Password   |
-	| daniel.terceros@test.com | Password1$ |
-	Then I click login button
-	Then I should see the home page with user Daniel Terceros logged
+#--------------------------------------------------------------------------------
+@acceptance
+Scenario: Try to login with invalid credentials
+	Given I navigated to the login page
+	When I try to login with invalid credentials
+	| Username     | Password |
+	| asd@test.com | asdf1234 |
+	Then I should not login the application
+	And  I should see the message "Authentication failed." displayed	

@@ -7,10 +7,5 @@ namespace AutoFramework.Base
         public IWebDriver Driver { get; set; }
         
         public BasePage CurrentPage { get; set; }
-
-        public void GoToUrl(string url)
-        {
-            Driver.Url = url;
-        }
     }
 }

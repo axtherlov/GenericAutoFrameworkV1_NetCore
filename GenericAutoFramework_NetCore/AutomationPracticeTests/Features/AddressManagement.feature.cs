@@ -20,22 +20,23 @@ namespace AutomationPracticeTests.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Acount")]
-    public partial class AcountFeature
+    [NUnit.Framework.DescriptionAttribute("Address Management")]
+    public partial class AddressManagementFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "Account.feature"
+#line 1 "AddressManagement.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Acount", "\tAddress management", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Address Management", "\tAs a logged user I want to have the ability to asign new addresses to my account" +
+                    "", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -77,6 +78,9 @@ namespace AutomationPracticeTests.Features
         {
 #line 4
 #line hidden
+#line 5
+ testRunner.Given("I am logged in the application with any user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
         }
         
         [NUnit.Framework.TestAttribute()]
@@ -112,36 +116,9 @@ this.ScenarioInitialize(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 9
- testRunner.Given("I have navigated to the application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 10
- testRunner.And("I see the application opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 11
- testRunner.Then("I click login link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Given("I navigated to Address creation form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Username",
-                            "Password"});
-                table1.AddRow(new string[] {
-                            "daniel.terceros@test.com",
-                            "Password1$"});
-#line 12
- testRunner.When("I enter the username and password", ((string)(null)), table1, "When ");
-#line hidden
-#line 15
- testRunner.Then("I click login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 16
- testRunner.And("I click AccountName link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 17
- testRunner.And("I click MyAddresses link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 18
- testRunner.And("I click AddNewAddress link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                             "FirstName",
                             "LastName",
                             "Address",
@@ -150,7 +127,7 @@ this.FeatureBackground();
                             "PostalCode",
                             "MobilePhone",
                             "Alias"});
-                table2.AddRow(new string[] {
+                table1.AddRow(new string[] {
                             "Daniel",
                             "Terceros",
                             "123 Street",
@@ -159,14 +136,11 @@ this.FeatureBackground();
                             "12345",
                             "701234147",
                             "MyAddress"});
-#line 19
- testRunner.When("I Fill the create address form", ((string)(null)), table2, "When ");
+#line 10
+ testRunner.When("I Fill the create address form", ((string)(null)), table1, "When ");
 #line hidden
-#line 22
- testRunner.And("I click Save button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 23
- testRunner.Then("I should see the address header MyAddress displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 13
+ testRunner.Then("The address should be created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -1,13 +1,16 @@
 ﻿using AutoFramework.Base;
 using AutoFramework.Extensions;
 using OpenQA.Selenium;
+using SeleniumExtras.WaitHelpers;
 
 namespace AutomationPracticeTests.Pages
 {
     public abstract class MenuPage : BasePage
     {
+        private string ACCOUNT_LINK = "//a[@title='View my customer account']";
+
         private IWebElement _signInButton => driverContext.Driver.FindByXPath("//a[@title='Log in to your customer account']");
-        private IWebElement _accountLink => driverContext.Driver.FindElement(By.XPath("//a[@title='View my customer account']"));
+        private IWebElement _accountLink => driverContext.Driver.FindElement(By.XPath(ACCOUNT_LINK));
         private IWebElement _contactUsLink => driverContext.Driver.FindElement(By.XPath("//a[@title='Contact Us']"));
 
         protected MenuPage(DriverContext driverContext) 
@@ -36,14 +39,14 @@ namespace AutomationPracticeTests.Pages
             return new AccountPage(driverContext);
         }
 
-        public string GetLoggerUser()
+        public string GetLoggedUser()
         {
             return _accountLink.GetLinkText();
         }
 
-        public void CheckIfSignInExists()
+        public bool LoggedUserIsNotVisible()
         {
-            _signInButton.AssertElementPresent();
+            return wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath(ACCOUNT_LINK)));
         }
     }
 }

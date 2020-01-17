@@ -35,8 +35,7 @@ namespace AutomationPracticeTests.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Login", "\tCheck if the login functionality is working\r\n\tas expected with different permuta" +
-                    "tions and\r\n\tcombinations of data", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Login", "\tAs a regular user, I want to have the ability to\r\n\tlog in in the application", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -74,25 +73,22 @@ namespace AutomationPracticeTests.Features
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void FeatureBackground()
-        {
-#line 6
-#line hidden
-        }
-        
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Check Login with correct username and password")]
+        [NUnit.Framework.DescriptionAttribute("Login with valid credentials")]
         [NUnit.Framework.CategoryAttribute("smoke")]
-        [NUnit.Framework.CategoryAttribute("positive")]
-        public virtual void CheckLoginWithCorrectUsernameAndPassword()
+        [NUnit.Framework.TestCaseAttribute("A", "daniel.terceros@test.com", "Password1$", "Daniel Terceros", null)]
+        [NUnit.Framework.TestCaseAttribute("B", "danielt@test.com", "Password1$", "D Terceros", null)]
+        public virtual void LoginWithValidCredentials(string testcase, string username, string password, string loggedUser, string[] exampleTags)
         {
-            string[] tagsOfScenario = new string[] {
-                    "smoke",
-                    "positive"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Check Login with correct username and password", null, new string[] {
-                        "smoke",
-                        "positive"});
-#line 10
+            string[] @__tags = new string[] {
+                    "smoke"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Login with valid credentials", null, @__tags);
+#line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -112,32 +108,65 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 6
-this.FeatureBackground();
+#line 8
+ testRunner.Given("I navigated to the login page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 11
- testRunner.Given("I have navigated to the application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 9
+ testRunner.When(string.Format("I Try to login with valid credentials {0} and {1}", username, password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 12
- testRunner.And("I see the application opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 10
+ testRunner.Then(string.Format("I should see the home page with user {0} logged", loggedUser), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 13
- testRunner.Then("I click login link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Try to login with invalid credentials")]
+        [NUnit.Framework.CategoryAttribute("acceptance")]
+        public virtual void TryToLoginWithInvalidCredentials()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "acceptance"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Try to login with invalid credentials", null, new string[] {
+                        "acceptance"});
+#line 19
+this.ScenarioInitialize(scenarioInfo);
 #line hidden
-                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 20
+ testRunner.Given("I navigated to the login page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                             "Username",
                             "Password"});
-                table5.AddRow(new string[] {
-                            "daniel.terceros@test.com",
-                            "Password1$"});
-#line 14
- testRunner.When("I enter the username and password", ((string)(null)), table5, "When ");
+                table3.AddRow(new string[] {
+                            "asd@test.com",
+                            "asdf1234"});
+#line 21
+ testRunner.When("I try to login with invalid credentials", ((string)(null)), table3, "When ");
 #line hidden
-#line 17
- testRunner.Then("I click login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 24
+ testRunner.Then("I should not login the application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 18
- testRunner.Then("I should see the home page with user Daniel Terceros logged", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 25
+ testRunner.And("I should see the message \"Authentication failed.\" displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

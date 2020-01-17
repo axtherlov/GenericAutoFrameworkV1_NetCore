@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace AutoFramework.Config
 {
-    public class ConfigReader
+    public static class ConfigReader
     {
         public static void SetFrameworkSettings()
         {

@@ -20,23 +20,23 @@ namespace AutomationPracticeTests.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("ContactUs")]
-    public partial class ContactUsFeature
+    [NUnit.Framework.DescriptionAttribute("Customer Service")]
+    public partial class CustomerServiceFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "ContactUs.feature"
+#line 1 "CustomerService.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "ContactUs", "\tAllow to contact customers to customer service for question about products\r\n\tand" +
-                    " also send reports about possible problems. The message can include attachments", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Customer Service", "\tAs I logged user I want to have the ability to contact customer service\r\n\tto sen" +
+                    "d them notification about a product service or status of the web app", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -74,16 +74,25 @@ namespace AutomationPracticeTests.Features
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 5
+#line hidden
+#line 6
+testRunner.Given("I am logged in the application with any user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+        }
+        
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Create message for customer service")]
-        [NUnit.Framework.CategoryAttribute("smoke")]
+        [NUnit.Framework.CategoryAttribute("Regular")]
         public virtual void CreateMessageForCustomerService()
         {
             string[] tagsOfScenario = new string[] {
-                    "smoke"};
+                    "Regular"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create message for customer service", null, new string[] {
-                        "smoke"});
-#line 6
+                        "Regular"});
+#line 9
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -103,51 +112,33 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 7
- testRunner.Given("I have navigated to the application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 5
+this.FeatureBackground();
 #line hidden
-#line 8
- testRunner.And("I see the application opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 9
- testRunner.Then("I click login link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Username",
-                            "Password"});
-                table3.AddRow(new string[] {
-                            "daniel.terceros@test.com",
-                            "Password1$"});
 #line 10
- testRunner.When("I enter the username and password", ((string)(null)), table3, "When ");
+ testRunner.Given("I navigated to ContactUs form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 13
- testRunner.Then("I click login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 14
- testRunner.And("I click ContactUs link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                             "SubjectHeading",
                             "Email",
                             "OrderReference",
                             "Product",
                             "Message"});
-                table4.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "Customer service",
                             "daniel.terceros@test.com",
                             "ENXYOZNNS - 08/02/2019",
                             "Printed Dress - Color : Orange, Size : S",
                             "I need help with this product"});
+#line 11
+ testRunner.When("I fill the contactUs form for customer service", ((string)(null)), table2, "When ");
+#line hidden
+#line 14
+ testRunner.Then("The customer service message should be sent", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
 #line 15
- testRunner.When("I fill the contactUs form for customer service", ((string)(null)), table4, "When ");
-#line hidden
-#line 18
- testRunner.And("I click Send button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 19
- testRunner.Then("I should see the message Your message has been successfully sent to our team. dis" +
-                        "played", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("I should see the message \"Your message has been successfully sent to our team.\" d" +
+                        "isplayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
