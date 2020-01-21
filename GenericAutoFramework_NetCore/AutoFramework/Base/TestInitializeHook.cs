@@ -5,13 +5,8 @@ using AventStack.ExtentReports;
 using AventStack.ExtentReports.Gherkin.Model;
 using AventStack.ExtentReports.Reporter;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Support.Extensions;
 using TechTalk.SpecFlow;
-using WebDriverManager;
-using WebDriverManager.DriverConfigs.Impl;
 using ExtentReport = AventStack.ExtentReports.ExtentReports;
 
 namespace AutoFramework.Base
@@ -32,9 +27,9 @@ namespace AutoFramework.Base
             _driverContext = driverContext;
         }
 
-        protected void SetFrameworkSettings()
+        protected static void SetupFrameworkSettings(FileReader fileReader)
         {
-            ConfigReader.SetFrameworkSettings();
+            ConfigReader2.SetupFrameworkSettings(fileReader);
             LogHelpers.CreateLogFile();
         }
 
@@ -132,89 +127,4 @@ namespace AutoFramework.Base
 
         #endregion
     }
-
-    public class BrowserFactory
-    {
-        public IWebDriver OpenBrowser(BrowserType browserType = BrowserType.Chrome)
-        {
-            IWebDriver browser;
-            switch (browserType)
-            {
-                case BrowserType.InternetExplorer:
-                    browser = new InternetExplorer().Init();
-                    LogHelpers.Write("Internet Explorer Opened");
-                    break;
-                case BrowserType.Chrome:
-                    browser = new Chrome().Init();
-                    LogHelpers.Write("Chrome Opened");
-                    break;
-                case BrowserType.Firefox:
-                    browser = new Firefox().Init();
-                    LogHelpers.Write("Firefox Opened");
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(browserType), browserType, null);
-            }
-            return browser;
-        }
-    }
-
-    public interface IBrowser
-    {
-        void SetupDriver();
-    }
-
-    public class InternetExplorer : IBrowser
-    {
-        public InternetExplorerDriver Init()
-        {
-            SetupDriver();
-            return new InternetExplorerDriver(GetOptions());
-        }
-
-        public void SetupDriver() => new DriverManager().SetUpDriver(new InternetExplorerConfig());
-
-        private InternetExplorerOptions GetOptions()
-        {
-            var options = new InternetExplorerOptions();
-            return options;
-        }
-    }
-
-    public class Firefox : IBrowser
-    {
-        public FirefoxDriver Init()
-        {
-            SetupDriver();
-            return new FirefoxDriver(GetOptions());
-        }
-
-        public void SetupDriver() => new DriverManager().SetUpDriver(new FirefoxConfig());
-
-        private FirefoxOptions GetOptions()
-        {
-            var options = new FirefoxOptions();
-            options.AddArgument("--incognito");
-            return options;
-        }
-    }
-
-    public class Chrome : IBrowser
-    {
-        public ChromeDriver Init()
-        {
-            SetupDriver();
-            return new ChromeDriver(GetOptions());
-        }
-
-        public void SetupDriver() => new DriverManager().SetUpDriver(new ChromeConfig());
-
-        private ChromeOptions GetOptions()
-        {
-            var options = new ChromeOptions();
-            options.AddArgument("--incognito");
-            return options;
-        }
-    }
-
 }

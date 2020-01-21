@@ -1,6 +1,5 @@
 ﻿using AutoFramework.Base;
 using AutomationPracticeTests.Pages;
-using AventStack.ExtentReports.Model;
 
 namespace AutomationPracticeTests.Steps
 {

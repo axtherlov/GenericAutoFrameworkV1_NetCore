@@ -1,4 +1,5 @@
 ﻿using AutoFramework.Base;
+using AutoFramework.Config;
 using TechTalk.SpecFlow;
 
 namespace AutomationPracticeTests.Hooks
@@ -28,15 +29,15 @@ namespace AutomationPracticeTests.Hooks
         }
 
         [BeforeTestRun]
-        public static void TestInitialize()
+        public static void BeforeTestRun()
         {
+            SetupFrameworkSettings(new ConfigJsonReader());
             SetExtentReportSettings();
         }
 
         [BeforeScenario]
         public void BeforeScenario()
         {
-            SetFrameworkSettings();
             InitializeBrowser();
             SetCurrentFeatureName(_featureContext);
             SetCurrentScenarioName(_scenarioContext);
@@ -55,7 +56,7 @@ namespace AutomationPracticeTests.Hooks
         }
 
         [AfterTestRun]
-        public static void TestEnd()
+        public static void AfterTestRun()
         {
             FlushReport();
         }

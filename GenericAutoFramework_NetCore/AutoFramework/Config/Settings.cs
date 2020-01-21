@@ -1,6 +1,5 @@
-﻿using System;
-using System.Data.SqlClient;
-using AutoFramework.Base;
+﻿using System.Data.SqlClient;
+using AutoFramework.Browser;
 
 namespace AutoFramework.Config
 {

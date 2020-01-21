@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<configuration>
+  <testConfiguration>
+    <aut>http://automationpractice.com/index.php</aut>
+    <browser>Firefox</browser>
+    <testType>Smoke</testType>
+    <isLog>Y</isLog>
+    <logPath>C:\Logs\</logPath>
+    <autConnectionString>....</autConnectionString>
+  </testConfiguration>
+</configuration>

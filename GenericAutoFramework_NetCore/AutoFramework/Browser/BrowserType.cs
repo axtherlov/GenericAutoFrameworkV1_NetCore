@@ -1,4 +1,4 @@
-﻿namespace AutoFramework.Base
+﻿namespace AutoFramework.Browser
 {
     public enum BrowserType
     {

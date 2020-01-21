@@ -1,14 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace AutoFramework.Config
 {
-    [JsonObject("testSettings")]
+    //[JsonObject("testSettings")]
+    [DataContract]
     public class TestSettings
     {
         [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty("aut")]
+       // [JsonProperty("aut")]
+       [DataMember]
         public string Aut { get; set; }
 
         [JsonProperty("testType")]
