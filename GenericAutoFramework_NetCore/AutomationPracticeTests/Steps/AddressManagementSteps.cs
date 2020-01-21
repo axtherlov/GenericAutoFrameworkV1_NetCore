@@ -19,7 +19,7 @@ namespace AutomationPracticeTests.Steps
         [Given(@"I navigated to Address creation form")]
         public void GivenINavigatedToAddressCreationForm()
         {
-            driverContext.CurrentPage = NavigateToAddressCreationForm();
+            GoToAddressCreationForm();
         }
 
         [When(@"I Fill the create address form")]

@@ -1,36 +1,59 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using AutoFramework.Browser;
+using AutoFramework.Helpers;
 using Microsoft.Extensions.Configuration;
 
 namespace AutoFramework.Config
 {
     public abstract class FileReader
     {
-        public void SetupFrameworkSettings()
+        public void SetupFrameworkSettings()   //Template method
         {
-            var configBuilder = SetupBuilder();
-            ReadSettingsFromFile(configBuilder);
+            ReadSettingsFromFile( SetupBuilder());
         }
 
         protected abstract IConfigurationRoot SetupBuilder();
 
-        protected virtual void ReadSettingsFromFile(IConfigurationRoot configBuilder)
+        protected virtual void ReadSettingsFromFile(IConfigurationRoot configRoot)
         {
-            Settings.AUT = configBuilder.GetSection("testConfiguration").Get<TestSettings>().Aut;
-            Settings.TestType = configBuilder.GetSection("testConfiguration").Get<TestSettings>().TestType;
-            Settings.IsLog = configBuilder.GetSection("testConfiguration").Get<TestSettings>().IsLog;
-            Settings.LogPath = configBuilder.GetSection("testConfiguration").Get<TestSettings>().LogPath;
-            Settings.BrowserType = (BrowserType)Enum.Parse(typeof(BrowserType), configBuilder.GetSection("testConfiguration").Get<TestSettings>().Browser);
-            Settings.AutConnectionString = configBuilder.GetSection("testConfiguration").Get<TestSettings>().AutConnectionString;
-        }
-    }
+            var testSettings = configRoot.GetSection("testConfiguration").Get<TestSettings>();
 
-    public static class ConfigReader2
-    {
-        public static void SetupFrameworkSettings(FileReader fileReader)
+            if (SettingValuesAreValid(testSettings))
+            {
+                Settings.Aut = testSettings.Aut;
+                Settings.TestType = testSettings.TestType;
+                Settings.IsLog = testSettings.IsLog;
+                Settings.LogPath = testSettings.LogPath;
+                Settings.BrowserType = (BrowserType) Enum.Parse(typeof(BrowserType), testSettings.Browser);
+                Settings.AutConnectionString = testSettings.AutConnectionString;
+                Settings.ImplicitWaitTimeout = testSettings.ImplicitWaitTimeout;
+                Settings.PageLoadTimeout = testSettings.PageLoadTimeout;
+            }
+            else
+            {
+                throw new Exception("Invalid values in Setting Files");
+            }
+        }
+
+        private bool SettingValuesAreValid(TestSettings testSettings)
         {
-            fileReader.SetupFrameworkSettings();
+            var validationResults = new List<ValidationResult>();
+            if (!Validator.TryValidateObject(testSettings,
+                    new ValidationContext(testSettings),
+                    validationResults,
+                    true))
+            {
+                LogHelpers.Write("Error: Logging configuration is invalid!");
+                foreach (var validationResult in validationResults)
+                {
+                    Console.WriteLine("- {0}", validationResult.ErrorMessage);
+                }
+            }
+
+            return validationResults.Count == 0;
         }
     }
 
@@ -48,6 +71,14 @@ namespace AutoFramework.Config
             new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appSettings.json").Build();
+    }
+
+    public class ConfigReader2
+    {
+        public static void SetupFrameworkSettings(FileReader fileReader)
+        {
+            fileReader.SetupFrameworkSettings();
+        }
     }
 
     public static class ConfigReader
@@ -76,7 +107,7 @@ namespace AutoFramework.Config
 
         private static void ReadSettingsFromConfigFile(IConfigurationRoot configBuilder)
         {
-            Settings.AUT = configBuilder.GetSection("testConfiguration").Get<TestSettings>().Aut;
+            Settings.Aut = configBuilder.GetSection("testConfiguration").Get<TestSettings>().Aut;
             Settings.TestType = configBuilder.GetSection("testConfiguration").Get<TestSettings>().TestType;
             Settings.IsLog = configBuilder.GetSection("testConfiguration").Get<TestSettings>().IsLog;
             Settings.LogPath = configBuilder.GetSection("testConfiguration").Get<TestSettings>().LogPath;

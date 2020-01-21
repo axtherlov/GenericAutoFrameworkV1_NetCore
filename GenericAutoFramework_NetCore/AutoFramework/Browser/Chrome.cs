@@ -8,11 +8,11 @@ namespace AutoFramework.Browser
     {
         public ChromeDriver Init()
         {
-            SetupDriver();
+            SetupDriverManager();
             return new ChromeDriver(GetOptions());
         }
 
-        public void SetupDriver() => new DriverManager().SetUpDriver(new ChromeConfig());
+        public void SetupDriverManager() => new DriverManager().SetUpDriver(new ChromeConfig());
 
         private ChromeOptions GetOptions()
         {

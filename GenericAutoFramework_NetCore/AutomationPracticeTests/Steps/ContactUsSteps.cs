@@ -17,7 +17,7 @@ namespace AutomationPracticeTests.Steps
         [Given(@"I navigated to ContactUs form")]
         public void GivenINavigateToContactUsForm()
         {
-            driverContext.CurrentPage = driverContext.CurrentPage.As<HomePage>().ClickContactUsButton();
+            GoToContactUsPage();
         }
 
         [When(@"I fill the contactUs form for customer service")]

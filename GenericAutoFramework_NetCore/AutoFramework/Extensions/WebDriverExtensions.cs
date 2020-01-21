@@ -41,12 +41,12 @@ namespace AutoFramework.Extensions
             }
         }
 
-        public static IWebElement FindById(this RemoteWebDriver remoteWebDriver, string element)
+        public static IWebElement FindById(this IWebDriver webDriver, string element)
         {
             try
             {
-                if (remoteWebDriver.FindElementById(element).IsElementPresent())
-                    return remoteWebDriver.FindElementById(element);
+                if (webDriver.FindElement(By.Id(element)).IsElementPresent())
+                    return webDriver.FindElement(By.Id(element));
             }
             catch (Exception)
             {
@@ -55,12 +55,12 @@ namespace AutoFramework.Extensions
             return null;
         }
 
-        public static IWebElement FindByXPath(this IWebDriver remoteWebDriver, string element)
+        public static IWebElement FindByXPath(this IWebDriver webDriver, string element)
         {
             try
             {
-                if (remoteWebDriver.FindElement(By.XPath(element)).IsElementPresent())
-                    return remoteWebDriver.FindElement(By.XPath(element));
+                if (webDriver.FindElement(By.XPath(element)).IsElementPresent())
+                    return webDriver.FindElement(By.XPath(element));
             }
             catch (Exception)
             {
@@ -68,5 +68,7 @@ namespace AutoFramework.Extensions
             }
             return null;
         }
+
+
     }
 }

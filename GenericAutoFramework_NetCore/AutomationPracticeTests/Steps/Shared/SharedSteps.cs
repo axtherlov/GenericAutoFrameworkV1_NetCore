@@ -16,7 +16,7 @@ namespace AutomationPracticeTests.Steps.Shared
         public void GivenIAmLoggedInTheApplication()
         {
             NavigateToInitialSite();
-            driverContext.CurrentPage = NavigateToLoginPage();
+            GoToLoginPage();
             driverContext.CurrentPage = driverContext.CurrentPage.As<LoginPage>()
                                                                  .Login("daniel.terceros@test.com", "Password1$");
         }

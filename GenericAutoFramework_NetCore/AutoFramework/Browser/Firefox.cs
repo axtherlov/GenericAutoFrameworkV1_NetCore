@@ -8,14 +8,17 @@ namespace AutoFramework.Browser
     {
         public FirefoxDriver Init()
         {
-            SetupDriver();
+            SetupDriverManager();
             return new FirefoxDriver(GetOptions());
         }
 
-        public void SetupDriver() => new DriverManager().SetUpDriver(new FirefoxConfig());
+        public void SetupDriverManager() => new DriverManager().SetUpDriver(new FirefoxConfig());
 
         private FirefoxOptions GetOptions()
         {
+            //var profile = new FirefoxProfile();
+            //var profileManager = new FirefoxProfileManager();
+            //profile =  profileManager.GetProfile("Default");
             var options = new FirefoxOptions();
             options.AddArgument("--incognito");
             return options;

@@ -51,8 +51,8 @@ namespace AutoFramework.Base
         protected void InitializeBrowser(int implicitWaitTimeout = 10, int pageLoadTimeout = 30)
         {
             _driverContext.Driver = new BrowserFactory().OpenBrowser(Settings.BrowserType);
-            _driverContext.Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(implicitWaitTimeout);
-            _driverContext.Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(pageLoadTimeout);
+            _driverContext.Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(Settings.ImplicitWaitTimeout);
+            _driverContext.Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(Settings.PageLoadTimeout);
         }
 
         protected void CloseBrowser()

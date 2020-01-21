@@ -2,6 +2,6 @@
 {
     public interface IBrowser
     {
-        void SetupDriver();
+        void SetupDriverManager();
     }
 }

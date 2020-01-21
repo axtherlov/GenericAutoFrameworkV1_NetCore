@@ -12,8 +12,8 @@ namespace AutoFramework.Base
 
         protected void NavigateToInitialSite()
         {
-            driverContext.Driver.Navigate().GoToUrl(Settings.AUT);
-            LogHelpers.Write($"Navigated to {Settings.AUT}");
+            driverContext.Driver.Navigate().GoToUrl(Settings.Aut);
+            LogHelpers.Write($"Navigated to {Settings.Aut}");
         }
     }
 }

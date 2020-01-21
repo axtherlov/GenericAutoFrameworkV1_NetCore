@@ -1,32 +1,39 @@
-﻿using System.Runtime.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace AutoFramework.Config
 {
     //[JsonObject("testSettings")]
-    [DataContract]
+   // [DataContract]
     public class TestSettings
     {
-        [JsonProperty("name")]
+       // [JsonProperty("name")]
         public string Name { get; set; }
 
        // [JsonProperty("aut")]
-       [DataMember]
+       // [DataMember]
         public string Aut { get; set; }
 
-        [JsonProperty("testType")]
+      //  [JsonProperty("testType")]
         public string TestType { get; set; }
 
-        [JsonProperty("isLog")]
+        //[JsonProperty("isLog")]
         public string IsLog { get; set; }
 
-        [JsonProperty("logPath")]
+        //[JsonProperty("logPath")]
         public string LogPath { get; set; }
 
-        [JsonProperty("browser")]
+       // [JsonProperty("browser")]
         public string Browser { get; set; }
         
-        [JsonProperty("autConnectionString")]
+       // [JsonProperty("autConnectionString")]
         public string AutConnectionString { get; set; }
+        
+        [Range(5, 30)]
+        public int ImplicitWaitTimeout { get; set; }
+
+        [Range(5, 120)]
+        public int PageLoadTimeout { get; set; }
     }
 }

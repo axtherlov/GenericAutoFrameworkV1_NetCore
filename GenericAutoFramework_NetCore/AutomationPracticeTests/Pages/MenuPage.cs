@@ -7,11 +7,13 @@ namespace AutomationPracticeTests.Pages
 {
     public abstract class MenuPage : BasePage
     {
-        private string ACCOUNT_LINK = "//a[@title='View my customer account']";
+        private const string ACCOUNT_LINK = "//a[@title='View my customer account']";
+        private const string SIGN_IN_BUTTON = "//a[@title='Log in to your customer account']";
+        private const string CONTACT_US_LINK = "//a[@title='Contact Us']";
 
-        private IWebElement _signInButton => driverContext.Driver.FindByXPath("//a[@title='Log in to your customer account']");
-        private IWebElement _accountLink => driverContext.Driver.FindElement(By.XPath(ACCOUNT_LINK));
-        private IWebElement _contactUsLink => driverContext.Driver.FindElement(By.XPath("//a[@title='Contact Us']"));
+        private IWebElement _signInButton => driverContext.Driver.FindByXPath(SIGN_IN_BUTTON);
+        private IWebElement _accountLink => driverContext.Driver.FindByXPath(ACCOUNT_LINK);
+        private IWebElement _contactUsLink => driverContext.Driver.FindByXPath(CONTACT_US_LINK);
 
         protected MenuPage(DriverContext driverContext) 
             : base(driverContext)

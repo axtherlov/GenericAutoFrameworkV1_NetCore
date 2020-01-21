@@ -8,15 +8,19 @@ namespace AutoFramework.Browser
     {
         public InternetExplorerDriver Init()
         {
-            SetupDriver();
+            SetupDriverManager();
             return new InternetExplorerDriver(GetOptions());
         }
 
-        public void SetupDriver() => new DriverManager().SetUpDriver(new InternetExplorerConfig());
+        public void SetupDriverManager() => new DriverManager().SetUpDriver(new InternetExplorerConfig());
 
         private InternetExplorerOptions GetOptions()
         {
-            var options = new InternetExplorerOptions();
+            var options = new InternetExplorerOptions
+            {
+                IntroduceInstabilityByIgnoringProtectedModeSettings = true,
+                EnsureCleanSession = true
+            };
             return options;
         }
     }
