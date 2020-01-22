@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoFramework", "AutoFramework\AutoFramework.csproj", "{19836B04-58F8-4992-BE8C-BE97173B363D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoFramework", "AutoFramework\AutoFramework.csproj", "{19836B04-58F8-4992-BE8C-BE97173B363D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomationPracticeTests", "AutomationPracticeTests\AutomationPracticeTests.csproj", "{F9948AD0-244B-4F18-B5D8-5298B6BE72E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationPracticeTests", "AutomationPracticeTests\AutomationPracticeTests.csproj", "{F9948AD0-244B-4F18-B5D8-5298B6BE72E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParaBank.Tests", "ParaBank.Tests\ParaBank.Tests.csproj", "{392A5244-7415-4C92-9962-5A4C113AE955}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{F9948AD0-244B-4F18-B5D8-5298B6BE72E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9948AD0-244B-4F18-B5D8-5298B6BE72E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9948AD0-244B-4F18-B5D8-5298B6BE72E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{392A5244-7415-4C92-9962-5A4C113AE955}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{392A5244-7415-4C92-9962-5A4C113AE955}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{392A5244-7415-4C92-9962-5A4C113AE955}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{392A5244-7415-4C92-9962-5A4C113AE955}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

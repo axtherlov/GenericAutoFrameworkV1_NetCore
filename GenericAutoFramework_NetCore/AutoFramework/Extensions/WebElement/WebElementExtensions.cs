@@ -4,7 +4,7 @@ using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace AutoFramework.Extensions
+namespace AutoFramework.Extensions.WebElement
 {
     public static class WebElementExtensions
     {
@@ -47,6 +47,7 @@ namespace AutoFramework.Extensions
         {
             try
             {
+
                 bool isPresent = element.Displayed;
                 return true;
             }

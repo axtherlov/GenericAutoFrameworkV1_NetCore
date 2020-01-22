@@ -11,10 +11,8 @@ using ExtentReport = AventStack.ExtentReports.ExtentReports;
 
 namespace AutoFramework.Base
 {
-    public abstract class TestInitializeHook// : Steps
+    public abstract class TestFrameworkHook : Steps
     {
-        private const string SCREENSHOT_PATH = @"C:\Reports\Screenshots\";
-
         private static ExtentReport _extentReport;
         private static ExtentTest _featureName;
         private static ExtentKlovReporter _klov;
@@ -22,7 +20,7 @@ namespace AutoFramework.Base
         private readonly DriverContext _driverContext;
         private ExtentTest _currentScenarioName; // should not be static otherwise scenario steps will overstep each other in case of parallel testing
 
-        protected TestInitializeHook(DriverContext driverContext)
+        protected TestFrameworkHook(DriverContext driverContext)
         {
             _driverContext = driverContext;
         }
@@ -35,7 +33,7 @@ namespace AutoFramework.Base
 
         protected static void SetExtentReportSettings()
         {
-            var htmlReporter = new ExtentHtmlReporter(@"C:\Reports\ExtentReport\ExtentReport.html");
+            var htmlReporter = new ExtentHtmlReporter($"{Settings.ReportsPath}\\ExtentReport\\ExtentReport.html");
             htmlReporter.Config.Theme = AventStack.ExtentReports.Reporter.Configuration.Theme.Dark;
             
             _extentReport = new ExtentReport();
@@ -43,22 +41,11 @@ namespace AutoFramework.Base
             _extentReport.AttachReporter(htmlReporter);
         }
 
-        protected static void FlushReport()
-        {
-            _extentReport.Flush();
-        }
-
-        protected void InitializeBrowser(int implicitWaitTimeout = 10, int pageLoadTimeout = 30)
+        protected void InitializeBrowser()
         {
             _driverContext.Driver = new BrowserFactory().OpenBrowser(Settings.BrowserType);
             _driverContext.Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(Settings.ImplicitWaitTimeout);
             _driverContext.Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(Settings.PageLoadTimeout);
-        }
-
-        protected void CloseBrowser()
-        {
-            _driverContext.Driver.Close();
-            _driverContext.Driver.Quit();
         }
 
         protected void SetCurrentFeatureName(FeatureContext featureContext)
@@ -70,7 +57,7 @@ namespace AutoFramework.Base
         {
             _currentScenarioName = _featureName.CreateNode<Scenario>(scenarioContext.ScenarioInfo.Title);
         }
-
+        
         protected void SetStepResultToReport(ScenarioContext scenarioContext)
         {
             ScenarioBlock scenarioBlock = scenarioContext.CurrentScenarioBlock;
@@ -89,6 +76,17 @@ namespace AutoFramework.Base
                     break;
             }
         }
+        
+        protected void CloseBrowser()
+        {
+            _driverContext.Driver.Close();
+            _driverContext.Driver.Quit();
+        }
+
+        protected static void FlushReport()
+        {
+            _extentReport.Flush();
+        }
 
         #region Helpers
 
@@ -100,7 +98,7 @@ namespace AutoFramework.Base
             {
                 string errorMessage = scenarioContext.TestError.Message;
                 string stackTrace = scenarioContext.TestError.StackTrace;
-                string fileName = $"{SCREENSHOT_PATH}{DateTime.UtcNow:yyyy-MM-dd hh-mm-ss} { scenarioContext.ScenarioInfo.Title}.png";
+                string fileName = $"{Settings.ScreenShotsPath}{DateTime.UtcNow:yyyy-MM-dd hh-mm-ss} { scenarioContext.ScenarioInfo.Title}.png";
 
                // TakeScreenShot(fileName);
                currentScenarioName.CreateNode<T>(stepInfo)

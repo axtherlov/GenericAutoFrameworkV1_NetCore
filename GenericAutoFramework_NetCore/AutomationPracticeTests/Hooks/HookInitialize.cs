@@ -5,7 +5,7 @@ using TechTalk.SpecFlow;
 namespace AutomationPracticeTests.Hooks
 {
     [Binding]
-    public class HookInitialize : TestInitializeHook
+    public class HookInitialize : TestFrameworkHook
     {
         /*  [BeforeTestRun]
             [BeforeFeature]

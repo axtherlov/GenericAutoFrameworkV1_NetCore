@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Support.UI;
+using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
-namespace AutoFramework.Extensions
+namespace AutoFramework.Extensions.WebDriver
 {
-    public static class WebDriverExtensions
+    public static class WebDriverWaitExtensions
     {
         public static void WaitForPageLoaded(this IWebDriver driver)
         {
@@ -41,34 +42,36 @@ namespace AutoFramework.Extensions
             }
         }
 
-        public static IWebElement FindById(this IWebDriver webDriver, string element)
+        public static IWebElement WaitToExists(this IWebDriver webDriver, By by, int timeout = 3)
         {
+            IWebElement foundElement = null;
             try
             {
-                if (webDriver.FindElement(By.Id(element)).IsElementPresent())
-                    return webDriver.FindElement(By.Id(element));
+                foundElement = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout))
+                    .Until(ExpectedConditions.ElementExists(by));
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw new ElementNotVisibleException($"Error: element not found {element}");
+                Console.WriteLine(e);
             }
-            return null;
+
+            return foundElement;
         }
 
-        public static IWebElement FindByXPath(this IWebDriver webDriver, string element)
+        public static IWebElement WaitToBeClickable(this IWebDriver webDriver, By by, int timeout = 3)
         {
+            IWebElement foundElement = null;
             try
             {
-                if (webDriver.FindElement(By.XPath(element)).IsElementPresent())
-                    return webDriver.FindElement(By.XPath(element));
+                foundElement = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout))
+                    .Until(ExpectedConditions.ElementToBeClickable(by));
             }
-            catch (Exception)
+            catch (TimeoutException e)
             {
-                throw new ElementNotVisibleException($"Error: element not found {element}");
+                Console.WriteLine($"Exception: {e}");
             }
-            return null;
+
+            return foundElement;
         }
-
-
     }
 }

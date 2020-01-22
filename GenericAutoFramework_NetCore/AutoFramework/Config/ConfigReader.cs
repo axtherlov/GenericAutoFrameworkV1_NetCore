@@ -26,7 +26,9 @@ namespace AutoFramework.Config
                 Settings.Aut = testSettings.Aut;
                 Settings.TestType = testSettings.TestType;
                 Settings.IsLog = testSettings.IsLog;
-                Settings.LogPath = testSettings.LogPath;
+                Settings.LogsPath = testSettings.LogsPath;
+                Settings.ScreenShotsPath = testSettings.ScreenShotsPath;
+                Settings.ReportsPath = testSettings.ReportsPath;
                 Settings.BrowserType = (BrowserType) Enum.Parse(typeof(BrowserType), testSettings.Browser);
                 Settings.AutConnectionString = testSettings.AutConnectionString;
                 Settings.ImplicitWaitTimeout = testSettings.ImplicitWaitTimeout;
@@ -81,58 +83,5 @@ namespace AutoFramework.Config
         }
     }
 
-    public static class ConfigReader
-    {
-        public static void SetFrameworkSettingsJson()
-        {
-            var configBuilder = SetupJsonBuilder();
-            ReadSettingsFromConfigFile(configBuilder);
-        }
-
-        public static void SetFrameworkSettingXml()
-        {
-            var configBuilder = SetupXmlBuilder();
-            ReadSettingsFromConfigFile(configBuilder);
-        }
-
-        private static IConfigurationRoot SetupJsonBuilder() =>
-            new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appSettings.json").Build();
-
-        private static IConfigurationRoot SetupXmlBuilder() =>
-            new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddXmlFile("appSettings.xml").Build();
-
-        private static void ReadSettingsFromConfigFile(IConfigurationRoot configBuilder)
-        {
-            Settings.Aut = configBuilder.GetSection("testConfiguration").Get<TestSettings>().Aut;
-            Settings.TestType = configBuilder.GetSection("testConfiguration").Get<TestSettings>().TestType;
-            Settings.IsLog = configBuilder.GetSection("testConfiguration").Get<TestSettings>().IsLog;
-            Settings.LogPath = configBuilder.GetSection("testConfiguration").Get<TestSettings>().LogPath;
-            Settings.BrowserType = (BrowserType)Enum.Parse(typeof(BrowserType), configBuilder.GetSection("testConfiguration").Get<TestSettings>().Browser);
-            Settings.AutConnectionString = configBuilder.GetSection("testConfiguration").Get<TestSettings>().AutConnectionString;
-        }
-
-        //public static void SetFrameworkSettings2()
-        //{
-        //    var builder = new ConfigurationBuilder()
-        //        .SetBasePath(Directory.GetCurrentDirectory())
-        //        .AddXmlFile("appSettings.xml");
-
-        //    IConfigurationRoot configRoot = builder.Build();
-
-        //    //string adminEmail1 = configRoot["SiteSettings:AdminEmail"];
-            
-        //    Settings.AUT = configRoot.GetSection("testConfiguration").Get<TestSettings>().Aut;;
-        //    Settings.TestType = configRoot.GetSection("testConfiguration").Get<TestSettings>().TestType;
-        //    var asd1 = configRoot.GetSection("testSettings:testSetting");
-        //    var asd2 = configRoot.GetSection("testSetting:staging");
-        //    var asd3 = configRoot.GetSection("staging");
-        //    var asd1x = configRoot.GetSection("testSettings:staging");
-
-        //    Settings.AUT = configRoot.GetSection("testConfiguration").Get<TestSettings>().Aut;
-        //}
-    }
+  
 }

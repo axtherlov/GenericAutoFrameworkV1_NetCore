@@ -12,8 +12,9 @@ namespace AutoFramework.Config
         public static SqlConnection SqlConnection { get; set; }
         public static string AutConnectionString { get; set; } 
         public static string IsLog { get; set; }
-        public static string LogPath { get; set; }
-        public static string IsReporting { get; set; }
+        public static string LogsPath { get; set; }
+        public static string ScreenShotsPath { get; set; }
+        public static string ReportsPath { get; set; }
         public static double ImplicitWaitTimeout { get; set; }
         public static double PageLoadTimeout { get; set; }
     }

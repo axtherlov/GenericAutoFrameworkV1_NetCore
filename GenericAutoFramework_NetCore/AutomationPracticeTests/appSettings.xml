@@ -5,7 +5,9 @@
     <browser>Firefox</browser>
     <testType>Smoke</testType>
     <isLog>Y</isLog>
-    <logPath>C:\Logs\</logPath>
+    <logsPath>C:\AutoFramework\Logs\</logsPath>
+    <screenShotsPath>C:\AutoFramework\ScreenShots\</screenShotsPath>
+    <reportsPath>C:\AutoFramework\Reports\</reportsPath>
     <autConnectionString>....</autConnectionString>
   </testConfiguration>
 </configuration>

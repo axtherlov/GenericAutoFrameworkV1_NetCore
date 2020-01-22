@@ -1,5 +1,6 @@
 ﻿using AutoFramework.Base;
-using AutoFramework.Extensions;
+using AutoFramework.Extensions.WebDriver;
+using AutoFramework.Extensions.WebElement;
 using OpenQA.Selenium;
 using SeleniumExtras.WaitHelpers;
 
