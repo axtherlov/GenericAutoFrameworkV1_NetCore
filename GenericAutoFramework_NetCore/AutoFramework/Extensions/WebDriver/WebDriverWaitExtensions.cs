@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using AutoFramework.Helpers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
@@ -66,10 +67,11 @@ namespace AutoFramework.Extensions.WebDriver
                 foundElement = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout))
                     .Until(ExpectedConditions.ElementToBeClickable(by));
             }
-            catch (TimeoutException e)
+            catch (WebDriverTimeoutException e)
             {
-                Console.WriteLine($"Exception: {e}");
+                Logger.LogException(e);
             }
+            
 
             return foundElement;
         }

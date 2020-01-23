@@ -13,7 +13,7 @@ namespace AutoFramework.Base
         protected void NavigateToInitialSite()
         {
             driverContext.Driver.Navigate().GoToUrl(Settings.Aut);
-            LogHelpers.Write($"Navigated to {Settings.Aut}");
+            Logger.LogInfo($"Navigated to {Settings.Aut}"); 
         }
     }
 }

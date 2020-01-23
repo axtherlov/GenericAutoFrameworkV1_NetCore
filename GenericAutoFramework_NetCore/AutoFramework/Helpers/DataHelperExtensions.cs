@@ -16,7 +16,7 @@ namespace AutoFramework.Helpers
             }
             catch (Exception e)
             {
-                LogHelpers.Write($"ERROR :: {e.Message}");
+                
             }
 
             return sqlConnection;
@@ -30,7 +30,7 @@ namespace AutoFramework.Helpers
             }
             catch (Exception e)
             {
-                LogHelpers.Write($"ERROR :: {e.Message}");
+                
             }
         }
 
@@ -59,7 +59,7 @@ namespace AutoFramework.Helpers
             {
                 dataset = null;
                 sqlConnection.Close();
-                LogHelpers.Write($"ERROR :: {e.Message}");
+                //LogHelpers.Write($"ERROR :: {e.Message}");
             }
 
             return null;

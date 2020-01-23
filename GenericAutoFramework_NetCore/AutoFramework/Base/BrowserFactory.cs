@@ -14,15 +14,15 @@ namespace AutoFramework.Base
             {
                 case BrowserType.InternetExplorer:
                     browser = new InternetExplorer().Init();
-                    LogHelpers.Write("Internet Explorer Opened");
+                    Logger.LogInfo("Internet Explorer Opened");
                     break;
                 case BrowserType.Chrome:
                     browser = new Chrome().Init();
-                    LogHelpers.Write("Chrome Opened");
+                    Logger.LogInfo("Chrome Opened");
                     break;
                 case BrowserType.Firefox:
                     browser = new Firefox().Init();
-                    LogHelpers.Write("Firefox Opened");
+                    Logger.LogInfo("Firefox Opened");
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(browserType), browserType, null);

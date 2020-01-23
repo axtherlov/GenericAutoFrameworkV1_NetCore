@@ -33,10 +33,8 @@ namespace AutoFramework.Config
                 Settings.AutConnectionString = testSettings.AutConnectionString;
                 Settings.ImplicitWaitTimeout = testSettings.ImplicitWaitTimeout;
                 Settings.PageLoadTimeout = testSettings.PageLoadTimeout;
-            }
-            else
-            {
-                throw new Exception("Invalid values in Setting Files");
+
+                Logger.LogIn("Configuration file read successfully");
             }
         }
 
@@ -48,10 +46,9 @@ namespace AutoFramework.Config
                     validationResults,
                     true))
             {
-                LogHelpers.Write("Error: Logging configuration is invalid!");
                 foreach (var validationResult in validationResults)
                 {
-                    Console.WriteLine("- {0}", validationResult.ErrorMessage);
+                    Logger.LogError(validationResult.ErrorMessage);
                 }
             }
 
@@ -75,13 +72,12 @@ namespace AutoFramework.Config
                 .AddJsonFile("appSettings.json").Build();
     }
 
-    public class ConfigReader2
+    public class ConfigReader
     {
         public static void SetupFrameworkSettings(FileReader fileReader)
         {
             fileReader.SetupFrameworkSettings();
         }
     }
-
   
 }

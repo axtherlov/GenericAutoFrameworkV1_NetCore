@@ -27,8 +27,8 @@ namespace AutoFramework.Base
 
         protected static void SetupFrameworkSettings(FileReader fileReader)
         {
-            ConfigReader2.SetupFrameworkSettings(fileReader);
-            LogHelpers.CreateLogFile();
+            ConfigReader.SetupFrameworkSettings(fileReader);
+            //LogHelpers.CreateLogFile();
         }
 
         protected static void SetExtentReportSettings()
@@ -43,6 +43,7 @@ namespace AutoFramework.Base
 
         protected void InitializeBrowser()
         {
+            Logger.LogIn("TEST START");
             _driverContext.Driver = new BrowserFactory().OpenBrowser(Settings.BrowserType);
             _driverContext.Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(Settings.ImplicitWaitTimeout);
             _driverContext.Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(Settings.PageLoadTimeout);
@@ -50,12 +51,16 @@ namespace AutoFramework.Base
 
         protected void SetCurrentFeatureName(FeatureContext featureContext)
         {
-            _featureName = _extentReport.CreateTest<Feature>(featureContext.FeatureInfo.Title);
+            var featureTitle = featureContext.FeatureInfo.Title;
+            _featureName = _extentReport.CreateTest<Feature>(featureTitle);
+            Logger.LogDebug($"Feature: {featureTitle}");
         }
 
         protected void SetCurrentScenarioName(ScenarioContext scenarioContext)
         {
-            _currentScenarioName = _featureName.CreateNode<Scenario>(scenarioContext.ScenarioInfo.Title);
+            var scenarioTitle = scenarioContext.ScenarioInfo.Title;
+            _currentScenarioName = _featureName.CreateNode<Scenario>(scenarioTitle);
+            Logger.LogDebug($"Scenario: {scenarioTitle}");
         }
         
         protected void SetStepResultToReport(ScenarioContext scenarioContext)
@@ -81,6 +86,7 @@ namespace AutoFramework.Base
         {
             _driverContext.Driver.Close();
             _driverContext.Driver.Quit();
+            Logger.LogOut("TEST COMPLETED");
         }
 
         protected static void FlushReport()
