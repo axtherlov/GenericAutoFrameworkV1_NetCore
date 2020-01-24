@@ -4,7 +4,7 @@ namespace ParaBank.Tests.Steps.Shared
 {
     public class NavigationSteps : BaseStep
     {
-        public NavigationSteps(DriverContext driverContext) 
+        public NavigationSteps(DriverContext driverContext)
             : base(driverContext)
         {
         }

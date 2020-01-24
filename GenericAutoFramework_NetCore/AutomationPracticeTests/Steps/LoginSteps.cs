@@ -1,5 +1,6 @@
 ﻿using AutoFramework.Base;
 using AutomationPracticeTests.Pages;
+using AutomationPracticeTests.Steps.Shared;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -21,7 +22,7 @@ namespace AutomationPracticeTests.Steps
         {
             NavigateToInitialSite();
             driverContext.CurrentPage = new HomePage(driverContext);
-            driverContext.CurrentPage = driverContext.CurrentPage.As<HomePage>().ClickSignButton();
+            driverContext.CurrentPage.As<HomePage>().ClickSignButton();
         }
 
         #endregion
@@ -31,16 +32,14 @@ namespace AutomationPracticeTests.Steps
         [When(@"I Try to login with valid credentials (.*) and (.*)")]
         public void WhenITryToLoginWithTheCredentials(string username, string password)
         {
-            driverContext.CurrentPage.As<LoginPage>().FillCredentials(username, password);
-            driverContext.CurrentPage.As<LoginPage>().ClickSignInButton();
+            driverContext.CurrentPage.As<LoginPage>().Login(username, password);
         }
 
         [When(@"I try to login with invalid credentials")]
         public void WhenITryToLoginWithInvalidCredentials(Table table)
         {
             dynamic data = table.CreateDynamicInstance();
-            driverContext.CurrentPage.As<LoginPage>().FillCredentials(data.Username, data.Password);
-            driverContext.CurrentPage.As<LoginPage>().ClickSignInButton();
+            driverContext.CurrentPage.As<LoginPage>().FailedLogin(data.Username, data.Password);
         }
 
         #endregion

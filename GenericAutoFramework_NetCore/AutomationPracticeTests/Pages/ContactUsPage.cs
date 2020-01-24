@@ -8,7 +8,7 @@ namespace AutomationPracticeTests.Pages
     public class ContactUsPage : MenuPage
     {
         private const string MESSAGE_SEND_TEXT= "//p[@class='alert alert-success']";
-        private IWebElement _subjectHeadingDropdown => driverContext.Driver.WaitToBeClickable(By.Id("id_contact1"));
+        private IWebElement _subjectHeadingDropdown => driverContext.Driver.FindById("id_contact");
         private IWebElement _emailInput => driverContext.Driver.FindElement(By.Id("email"));
         private IWebElement _orderReferenceDropDown => driverContext.Driver.FindElement(By.Name("id_order"));
         private IWebElement _productDropDown => driverContext.Driver.FindElement(By.Name("id_product"));

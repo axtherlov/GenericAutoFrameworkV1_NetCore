@@ -5,7 +5,7 @@ using TechTalk.SpecFlow;
 namespace AutomationPracticeTests.Hooks
 {
     [Binding]
-    public class HookInitialize : TestFrameworkHook
+    public class HookInitialize : BaseHook
     {
         /*  [BeforeTestRun]
             [BeforeFeature]
@@ -21,11 +21,9 @@ namespace AutomationPracticeTests.Hooks
         private readonly FeatureContext _featureContext;
         private readonly ScenarioContext _scenarioContext;
 
-        public HookInitialize(DriverContext driverContext, FeatureContext featureContext, ScenarioContext scenarioContext)
+        public HookInitialize(DriverContext driverContext)
             : base(driverContext)
         {
-            _featureContext = featureContext;
-            _scenarioContext = scenarioContext;
         }
 
         [BeforeTestRun]
@@ -36,17 +34,17 @@ namespace AutomationPracticeTests.Hooks
         }
 
         [BeforeScenario]
-        public void BeforeScenario()
+        public void BeforeScenario(FeatureContext featureContext, ScenarioContext scenarioContext)
         {
             InitializeBrowser();
-            SetCurrentFeatureName(_featureContext);
-            SetCurrentScenarioName(_scenarioContext);
+            SetCurrentFeatureName(featureContext);
+            SetCurrentScenarioName(scenarioContext);
         }
 
         [AfterStep]
-        public void AfterStep()
+        public void AfterStep(ScenarioContext scenarioContext)
         {
-            SetStepResultToReport(_scenarioContext);
+            SetStepResultToReport(scenarioContext);
         }
 
         [AfterScenario]

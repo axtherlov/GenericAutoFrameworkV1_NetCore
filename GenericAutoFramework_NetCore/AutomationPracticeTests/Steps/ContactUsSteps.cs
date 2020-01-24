@@ -1,5 +1,6 @@
 ﻿using AutoFramework.Base;
 using AutomationPracticeTests.Pages;
+using AutomationPracticeTests.Steps.Shared;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -8,7 +9,7 @@ namespace AutomationPracticeTests.Steps
 {
     [Binding, Scope(Feature = "Customer Service")]
     public sealed class ContactUsSteps : MenuSteps
-    {       
+    {
         public ContactUsSteps(DriverContext driverContext)
             : base(driverContext)
         {

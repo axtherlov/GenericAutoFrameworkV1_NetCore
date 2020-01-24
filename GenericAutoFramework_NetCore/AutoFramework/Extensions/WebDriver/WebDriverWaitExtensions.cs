@@ -71,7 +71,6 @@ namespace AutoFramework.Extensions.WebDriver
             {
                 Logger.LogException(e);
             }
-            
 
             return foundElement;
         }

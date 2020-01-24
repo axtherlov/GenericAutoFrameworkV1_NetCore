@@ -8,23 +8,21 @@ namespace AutomationPracticeTests.Pages
         private IWebElement _orderHistoryAndDetailsLink => driverContext.Driver.FindElement(By.XPath("//a[@title='Orders']"));
         private IWebElement _myAddressesLink => driverContext.Driver.FindElement(By.XPath("//a[@title='Addresses']"));
 
-        public AccountPage(DriverContext driverContext) 
+        public AccountPage(DriverContext driverContext)
             : base(driverContext)
         {
         }
-        
-        public OrderHistoryPage ClickOrderHistoryAndDetailsLink()
+
+        public void ClickOrderHistoryAndDetailsLink()
         {
             _orderHistoryAndDetailsLink.Click();
-            //return GetInstance<OrderHistoryPage>(driverContext);
-            return new OrderHistoryPage(driverContext);
+            driverContext.CurrentPage = new OrderHistoryPage(driverContext);
         }
 
-        public MyAddresses ClickMyAddressesLink()
+        public void ClickMyAddressesLink()
         {
             _myAddressesLink.Click();
-            //return GetInstance<MyAddresses>();
-            return new MyAddresses(driverContext);
+            driverContext.CurrentPage = new MyAddresses(driverContext);
         }
     }
 }

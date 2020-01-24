@@ -11,24 +11,23 @@ using ExtentReport = AventStack.ExtentReports.ExtentReports;
 
 namespace AutoFramework.Base
 {
-    public abstract class TestFrameworkHook : Steps
+    public class BaseHook : Steps
     {
         private static ExtentReport _extentReport;
         private static ExtentTest _featureName;
         private static ExtentKlovReporter _klov;
         
-        private readonly DriverContext _driverContext;
+        protected readonly DriverContext driverContext;
         private ExtentTest _currentScenarioName; // should not be static otherwise scenario steps will overstep each other in case of parallel testing
 
-        protected TestFrameworkHook(DriverContext driverContext)
+        protected BaseHook(DriverContext driverContext) 
         {
-            _driverContext = driverContext;
+            this.driverContext = driverContext;
         }
 
         protected static void SetupFrameworkSettings(FileReader fileReader)
         {
             ConfigReader.SetupFrameworkSettings(fileReader);
-            //LogHelpers.CreateLogFile();
         }
 
         protected static void SetExtentReportSettings()
@@ -44,9 +43,9 @@ namespace AutoFramework.Base
         protected void InitializeBrowser()
         {
             Logger.LogIn("TEST START");
-            _driverContext.Driver = new BrowserFactory().OpenBrowser(Settings.BrowserType);
-            _driverContext.Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(Settings.ImplicitWaitTimeout);
-            _driverContext.Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(Settings.PageLoadTimeout);
+            driverContext.Driver = new BrowserFactory().OpenBrowser(Settings.BrowserType);
+            driverContext.Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(Settings.ImplicitWaitTimeout);
+            driverContext.Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(Settings.PageLoadTimeout);
         }
 
         protected void SetCurrentFeatureName(FeatureContext featureContext)
@@ -84,8 +83,8 @@ namespace AutoFramework.Base
         
         protected void CloseBrowser()
         {
-            _driverContext.Driver.Close();
-            _driverContext.Driver.Quit();
+            driverContext.Driver.Close();
+            driverContext.Driver.Quit();
             Logger.LogOut("TEST COMPLETED");
         }
 
@@ -124,7 +123,7 @@ namespace AutoFramework.Base
 
         private void TakeScreenShot(string fileName)
         {
-            var screenShot = _driverContext.Driver.TakeScreenshot();
+            var screenShot = driverContext.Driver.TakeScreenshot();
             screenShot.SaveAsFile(fileName, ScreenshotImageFormat.Png);
             //Logger.Info($" ScreenShot Taken : {filename}");
         }

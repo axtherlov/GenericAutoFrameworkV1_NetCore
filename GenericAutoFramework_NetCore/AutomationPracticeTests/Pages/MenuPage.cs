@@ -16,30 +16,27 @@ namespace AutomationPracticeTests.Pages
         private IWebElement _accountLink => driverContext.Driver.FindByXPath(ACCOUNT_LINK);
         private IWebElement _contactUsLink => driverContext.Driver.FindByXPath(CONTACT_US_LINK);
 
-        protected MenuPage(DriverContext driverContext) 
+        protected MenuPage(DriverContext driverContext)
             : base(driverContext)
         {
         }
 
-        public LoginPage ClickSignButton()
+        public void ClickSignButton()
         {
             _signInButton.Click();
-            //return GetInstance<LoginPage>();
-            return new LoginPage(driverContext);
+            driverContext.CurrentPage = new LoginPage(driverContext);
         }
 
-        public ContactUsPage ClickContactUsButton()
+        public void ClickContactUsButton()
         {
             _contactUsLink.Click();
-            //return GetInstance<ContactUsPage>();
-            return new ContactUsPage(driverContext);
+            driverContext.CurrentPage = new ContactUsPage(driverContext);
         }
 
-        public AccountPage ClickAccountLink()
+        public void ClickAccountLink()
         {
             _accountLink.Click();
-            //return GetInstance<AccountPage>();
-            return new AccountPage(driverContext);
+            driverContext.CurrentPage = new AccountPage(driverContext);
         }
 
         public string GetLoggedUser()

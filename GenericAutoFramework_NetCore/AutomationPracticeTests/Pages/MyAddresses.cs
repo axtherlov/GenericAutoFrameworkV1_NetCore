@@ -22,7 +22,7 @@ namespace AutomationPracticeTests.Pages
         private IWebElement _sendButton  => driverContext.Driver.FindElement(By.Id("submitAddress"));
         private List<IWebElement> _addressHeaders  => driverContext.Driver.FindElements(By.XPath("//h3[@class='page-subheading']")).ToList();
 
-        public MyAddresses(DriverContext driverContext) 
+        public MyAddresses(DriverContext driverContext)
             : base(driverContext)
         {
         }

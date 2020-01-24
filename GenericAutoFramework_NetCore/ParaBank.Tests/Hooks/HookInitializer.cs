@@ -5,16 +5,16 @@ using ParaBank.Tests.Steps.Shared;
 
 namespace ParaBank.Tests.Hooks
 {
-    //[TestFixture]
-    public class HookInitializer : TestFrameworkHook
+    public class HookInitializer : BaseHook
     {
         protected NavigationSteps navigationSteps;
-        public HookInitializer(DriverContext driverContext) 
+
+        protected HookInitializer(DriverContext driverContext) 
             : base(driverContext)
         {
             navigationSteps = new NavigationSteps(driverContext);
         }
-
+     
         [SetUp]
         public void Setup()
         {
@@ -28,6 +28,5 @@ namespace ParaBank.Tests.Hooks
         {
             CloseBrowser();
         }
-
     }
 }

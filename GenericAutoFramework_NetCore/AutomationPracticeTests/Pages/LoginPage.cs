@@ -10,7 +10,7 @@ namespace AutomationPracticeTests.Pages
         private IWebElement _submitLoginButton => driverContext.Driver.FindElement(By.Id("SubmitLogin"));
         private IWebElement _errorText => driverContext.Driver.FindElement(By.XPath("//div[@class='alert alert-danger']/ol/li"));
 
-        public LoginPage(DriverContext driverContext) 
+        public LoginPage(DriverContext driverContext)
             : base(driverContext)
         {
         }
@@ -21,17 +21,17 @@ namespace AutomationPracticeTests.Pages
             _passwordInput.SendKeys(password);
         }
 
-        public HomePage ClickSignInButton()
-        {
-            _submitLoginButton.Click();
-           // return GetInstance<HomePage>(parallelConfig);
-           return new HomePage(driverContext);
-        }
-
-        public HomePage Login(string userName, string password)
+        public void Login(string userName, string password)
         {
             FillCredentials(userName, password);
-            return ClickSignInButton();
+            _submitLoginButton.Click();
+            driverContext.CurrentPage = new HomePage(driverContext);
+        }
+
+        public void FailedLogin(string userName, string password)
+        {
+            FillCredentials(userName, password);
+            _submitLoginButton.Click();
         }
 
         public string GetErrorMessageText()

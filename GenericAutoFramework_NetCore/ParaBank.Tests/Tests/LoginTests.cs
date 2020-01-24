@@ -5,11 +5,11 @@ using ParaBank.Tests.Pages;
 
 namespace ParaBank.Tests.Tests
 {
-    //[TestFixture(DriverContext)]
+    //[TestFixture(typeof(DriverContext))]
+    [TestFixture]
     public class LoginTests : HookInitializer
     {
-        private DriverContext driverContext;
-        public LoginTests(DriverContext driverContext)
+        protected LoginTests(DriverContext driverContext) 
             : base(driverContext)
         {
         }
@@ -17,12 +17,14 @@ namespace ParaBank.Tests.Tests
         [Test]
         public void LoginWithValidCredentials()
         {
-            //driverContext.CurrentPage = new LoginPage(driverContext);
-            //driverContext.CurrentPage.As<LoginPage>().Login("danielt", "Password1$");
+            driverContext.CurrentPage = new LoginPage(driverContext);
+            driverContext.CurrentPage.As<LoginPage>().Login("testUser", "Password1$");
 
-            //string loggedUSer = driverContext.CurrentPage.As<MenuPage>().GetLoggedUserText();
+            string loggedUSer = driverContext.CurrentPage.As<MenuPage>().GetLoggedUserText();
 
-            //Assert.AreEqual("Daniel T", loggedUSer);
+            Assert.AreEqual("Daniel T", loggedUSer);
         }
+
+        
     }
 }

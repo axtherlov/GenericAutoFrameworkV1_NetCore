@@ -7,7 +7,7 @@ namespace AutomationPracticeTests.Pages
     {
         private IWebElement _orderListTable => driverContext.Driver.FindElement(By.Id("order-list"));
 
-        public OrderHistoryPage(DriverContext driverContext) 
+        public OrderHistoryPage(DriverContext driverContext)
             : base(driverContext)
         {
         }

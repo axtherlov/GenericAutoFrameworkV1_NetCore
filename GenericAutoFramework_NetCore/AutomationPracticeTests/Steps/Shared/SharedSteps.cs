@@ -7,7 +7,7 @@ namespace AutomationPracticeTests.Steps.Shared
     [Binding]
     public class SharedSteps : MenuSteps
     {
-        public SharedSteps(DriverContext driverContext) 
+        public SharedSteps(DriverContext driverContext)
             : base(driverContext)
         {
         }
@@ -17,8 +17,8 @@ namespace AutomationPracticeTests.Steps.Shared
         {
             NavigateToInitialSite();
             GoToLoginPage();
-            driverContext.CurrentPage = driverContext.CurrentPage.As<LoginPage>()
-                                                                 .Login("daniel.terceros@test.com", "Password1$");
+            driverContext.CurrentPage.As<LoginPage>().Login("daniel.terceros@test.com", 
+                                                            "Password1$");
         }
     }
 }

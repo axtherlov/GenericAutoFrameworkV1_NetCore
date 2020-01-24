@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoFramework.Base;
 using AutomationPracticeTests.Pages;
+using AutomationPracticeTests.Steps.Shared;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -11,7 +12,7 @@ namespace AutomationPracticeTests.Steps
     public sealed class AddressManagementSteps : MenuSteps
     {
         private string _randomAddressName;
-        public AddressManagementSteps(DriverContext driverContext) 
+        public AddressManagementSteps(DriverContext driverContext)
             : base(driverContext)
         {
         }

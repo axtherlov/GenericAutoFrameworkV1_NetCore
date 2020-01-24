@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Runtime.CompilerServices;
 
 namespace AutoFramework.Helpers
 {
@@ -16,7 +15,7 @@ namespace AutoFramework.Helpers
             }
             catch (Exception e)
             {
-                
+                Logger.LogException(e);
             }
 
             return sqlConnection;
@@ -30,7 +29,7 @@ namespace AutoFramework.Helpers
             }
             catch (Exception e)
             {
-                
+                Logger.LogException(e);
             }
         }
 
@@ -59,7 +58,7 @@ namespace AutoFramework.Helpers
             {
                 dataset = null;
                 sqlConnection.Close();
-                //LogHelpers.Write($"ERROR :: {e.Message}");
+                Logger.LogException(e);
             }
 
             return null;
