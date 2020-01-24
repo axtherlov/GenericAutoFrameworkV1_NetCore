@@ -7,10 +7,16 @@ namespace ParaBank.Tests.Hooks
 {
     public class HookInitializer : BaseHook
     {
+       // protected BaseHook baseHook;
         protected NavigationSteps navigationSteps;
 
         protected HookInitializer(DriverContext driverContext) 
-            : base(driverContext)
+            : base (driverContext)
+        {
+            
+        }
+
+        public HookInitializer()
         {
             navigationSteps = new NavigationSteps(driverContext);
         }

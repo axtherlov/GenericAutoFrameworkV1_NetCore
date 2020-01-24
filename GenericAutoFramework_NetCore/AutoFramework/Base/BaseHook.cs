@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using AutoFramework.Config;
 using AutoFramework.Helpers;
 using AventStack.ExtentReports;
@@ -23,6 +24,12 @@ namespace AutoFramework.Base
         protected BaseHook(DriverContext driverContext) 
         {
             this.driverContext = driverContext;
+        }
+
+        public BaseHook()
+        {
+            if(driverContext==null)
+                driverContext = new DriverContext();
         }
 
         protected static void SetupFrameworkSettings(FileReader fileReader)

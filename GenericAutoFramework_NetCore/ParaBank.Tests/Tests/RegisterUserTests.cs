@@ -14,6 +14,11 @@ namespace ParaBank.Tests.Tests
         {
         }
 
+        public RegisterUserTests()
+        {
+            
+        }
+
         [Test]
         public void RegisterUserWithValidValues()
         {
