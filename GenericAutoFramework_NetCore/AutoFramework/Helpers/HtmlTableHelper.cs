@@ -82,28 +82,20 @@ namespace AutoFramework.Helpers
                 //Need to operate on those controls
                 if (controlToOperate != null && cell != null)
                 {
-                    //Since based on the control type, the retriving of text changes
-                    //created this kind of control
                     if (cell.ControlType == "hyperLink")
                     {
-                        var returnedControl = (from c in cell.ElementCollection
-                                               where c.Text == controlToOperate
-                                               select c).SingleOrDefault();
-                        //var returnedControl = cell.ElementCollection.SingleOrDefault(x => x.Text == controlToOperate);
+                        var returnedControl = cell.ElementCollection.SingleOrDefault(x => 
+                            x.Text == controlToOperate);
 
-                        //ToDo: Currenly only click is supported, future is not taken care here
                         returnedControl?.Click();
                     }
                     if (cell.ControlType == "input")
                     {
-                        var returnedControl = (from c in cell.ElementCollection
-                                               where c.GetAttribute("value") == controlToOperate
-                                               select c).SingleOrDefault();
+                        var returnedControl = cell.ElementCollection.SingleOrDefault(x => 
+                            x.GetAttribute("value") == controlToOperate);
 
-                        //ToDo: Currenly only click is supported, future is not taken care here
                         returnedControl?.Click();
                     }
-
                 }
                 else
                 {
@@ -114,7 +106,6 @@ namespace AutoFramework.Helpers
 
         private static IEnumerable GetDynamicRowNumber(string columnName, string columnValue)
         {
-            //dynamic row
             foreach (var table in _tableDataCollections)
             {
                 if (table.ColumnName == columnName && table.ColumnValue == columnValue)

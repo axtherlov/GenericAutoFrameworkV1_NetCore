@@ -1,11 +1,23 @@
 ﻿using AutoFramework.Base;
 using AutoFramework.Config;
+using BoDi;
 using TechTalk.SpecFlow;
 
 namespace AutomationPracticeTests.Hooks
 {
+    //[Binding]
+    //public class DriverSetup
+    //{
+    //    private IObjectContainer _objectContainer;
+
+    //    public DriverSetup(IObjectContainer objectContainer)
+    //    {
+    //        _objectContainer = objectContainer;
+    //    }
+    //}
+
     [Binding]
-    public class HookInitialize : BaseHook
+    public class SpecFlowHook : BaseHook
     {
         /*  [BeforeTestRun]
             [BeforeFeature]
@@ -18,10 +30,7 @@ namespace AutomationPracticeTests.Hooks
             [AfterFeature]
             [AfterTestRun] */
 
-        private readonly FeatureContext _featureContext;
-        private readonly ScenarioContext _scenarioContext;
-
-        public HookInitialize(DriverContext driverContext)
+        public SpecFlowHook(DriverContext driverContext)
             : base(driverContext)
         {
         }

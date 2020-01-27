@@ -1,9 +1,8 @@
 ﻿using System;
-using AutoFramework.Browser;
 using AutoFramework.Helpers;
 using OpenQA.Selenium;
 
-namespace AutoFramework.Base
+namespace AutoFramework.Browser
 {
     public class BrowserFactory
     {

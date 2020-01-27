@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Drawing;
+using AutoFramework.Browser;
 using AutoFramework.Config;
 using AutoFramework.Helpers;
 using AventStack.ExtentReports;
@@ -17,24 +17,18 @@ namespace AutoFramework.Base
         private static ExtentReport _extentReport;
         private static ExtentTest _featureName;
         private static ExtentKlovReporter _klov;
-        
-        protected readonly DriverContext driverContext;
+
+        private readonly DriverContext driverContext;
         private ExtentTest _currentScenarioName; // should not be static otherwise scenario steps will overstep each other in case of parallel testing
 
-        protected BaseHook(DriverContext driverContext) 
+        public BaseHook(DriverContext driverContext) 
         {
             this.driverContext = driverContext;
         }
 
-        public BaseHook()
+        public static void SetupFrameworkSettings(FileReader fileReader)
         {
-            if(driverContext==null)
-                driverContext = new DriverContext();
-        }
-
-        protected static void SetupFrameworkSettings(FileReader fileReader)
-        {
-            ConfigReader.SetupFrameworkSettings(fileReader);
+            fileReader.ReadFrameworkSettings();
         }
 
         protected static void SetExtentReportSettings()
@@ -47,7 +41,7 @@ namespace AutoFramework.Base
             _extentReport.AttachReporter(htmlReporter);
         }
 
-        protected void InitializeBrowser()
+        public void InitializeBrowser()
         {
             Logger.LogIn("TEST START");
             driverContext.Driver = new BrowserFactory().OpenBrowser(Settings.BrowserType);
@@ -88,7 +82,7 @@ namespace AutoFramework.Base
             }
         }
         
-        protected void CloseBrowser()
+        public void CloseBrowser()
         {
             driverContext.Driver.Close();
             driverContext.Driver.Quit();

@@ -5,34 +5,28 @@ using ParaBank.Tests.Steps.Shared;
 
 namespace ParaBank.Tests.Hooks
 {
-    public class HookInitializer : BaseHook
+    public class HookInitializer
     {
-       // protected BaseHook baseHook;
         protected NavigationSteps navigationSteps;
-
-        protected HookInitializer(DriverContext driverContext) 
-            : base (driverContext)
-        {
-            
-        }
+        protected DriverContext driverContext;
 
         public HookInitializer()
         {
             navigationSteps = new NavigationSteps(driverContext);
         }
-     
+
         [SetUp]
         public void Setup()
         {
-            SetupFrameworkSettings(new ConfigJsonReader());
-            InitializeBrowser();
+            BaseHook.SetupFrameworkSettings(new ConfigJsonReader());
+            //driverContext = InitializeBrowser();
             navigationSteps.NavigateToSite();
         }
 
         [TearDown]
         public void TearDown()
         {
-            CloseBrowser();
+            //CloseBrowser();
         }
     }
 }

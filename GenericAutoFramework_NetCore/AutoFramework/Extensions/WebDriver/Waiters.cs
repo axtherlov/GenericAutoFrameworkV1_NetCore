@@ -7,7 +7,7 @@ using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
 namespace AutoFramework.Extensions.WebDriver
 {
-    public static class WebDriverWaitExtensions
+    public static class Waiters
     {
         public static void WaitForPageLoaded(this IWebDriver driver)
         {

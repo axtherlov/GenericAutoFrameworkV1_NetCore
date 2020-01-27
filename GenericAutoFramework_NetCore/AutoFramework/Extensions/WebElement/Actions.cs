@@ -6,7 +6,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace AutoFramework.Extensions.WebElement
 {
-    public static class WebElementExtensions
+    public static class Actions
     {
         public static string GetSelectedDropDown(this IWebElement element)
         {
@@ -47,7 +47,6 @@ namespace AutoFramework.Extensions.WebElement
         {
             try
             {
-
                 bool isPresent = element.Displayed;
                 return true;
             }

@@ -1,5 +1,4 @@
 ﻿using System;
-using AutoFramework.Base;
 using NUnit.Framework;
 using ParaBank.Tests.Hooks;
 using ParaBank.Tests.Pages;
@@ -9,16 +8,7 @@ namespace ParaBank.Tests.Tests
     [TestFixture]
     public class LoginTests : HookInitializer
     {
-        protected LoginTests(DriverContext driverContext)
-            : base(driverContext)
-        {
-        }
-
-        public LoginTests()
-        {
-            
-        }
-
+        
         [Test]
         public void LoginWithValidCredentials()
         {

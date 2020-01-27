@@ -25,11 +25,8 @@ namespace AutoFramework.Helpers
                         }
                     });
 
-                    //Get all the Tables
                     DataTableCollection table = result.Tables;
-                    //Store it in DataTable
                     DataTable resultTable = table["Sheet1"];
-                    //return
                     return resultTable;
                 }
             }
@@ -43,7 +40,6 @@ namespace AutoFramework.Helpers
         {
             DataTable table = ExcelToDataTable(fileName);
 
-            //Iterate through the rows and columns of the Table
             for (int row = 1; row <= table.Rows.Count; row++)
             {
                 for (int col = 0; col < table.Columns.Count; col++)
@@ -70,13 +66,9 @@ namespace AutoFramework.Helpers
         {
             try
             {
-                //Retriving Data using LINQ to reduce much of iterations
-                string data = (from colData in _dataCol
-                               where colData.colName == columnName && colData.rowNumber == rowNumber
-                               select colData.colValue).SingleOrDefault();
-
-                //var datas = dataCol.Where(x => x.colName == columnName && x.rowNumber == rowNumber).SingleOrDefault().colValue;
-                return data.ToString();
+                string data = _dataCol.SingleOrDefault(x => x.colName == columnName && 
+                                                            x.rowNumber == rowNumber)?.colValue;
+                return data;
             }
             catch (Exception e)
             {

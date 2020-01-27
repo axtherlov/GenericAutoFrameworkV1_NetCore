@@ -38,9 +38,8 @@ namespace AutoFramework.Helpers
             DataSet dataset;
             try
             {
-                if (sqlConnection == null || sqlConnection != null && 
-                    (sqlConnection.State == ConnectionState.Closed ||
-                     sqlConnection.State == ConnectionState.Broken ))
+                if (sqlConnection == null || (sqlConnection.State == ConnectionState.Closed ||
+                                              sqlConnection.State == ConnectionState.Broken ))
                 {
                     sqlConnection.Open();
 
@@ -56,7 +55,6 @@ namespace AutoFramework.Helpers
             }
             catch (Exception e)
             {
-                dataset = null;
                 sqlConnection.Close();
                 Logger.LogException(e);
             }

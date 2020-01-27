@@ -7,15 +7,6 @@ using log4net.Config;
 
 namespace AutoFramework.Helpers
 {
-    public enum LogType
-    {
-        Debug,
-        Info,
-        Warn,
-        Error,
-        Fatal
-    }
-
     public static class Logger
     {
         private static ILog _log;
@@ -60,24 +51,9 @@ namespace AutoFramework.Helpers
             _log.Fatal(PrefixLog(path, line, method, message));
         }
 
-        public static void Log(string message, LogType type = LogType.Debug,
-            [CallerFilePath] string path = @"C:\Unknown.cs", [CallerLineNumber] int line = 0,
-            [CallerMemberName] string method = ""
-            )
-        {
-            ProcessLog(PrefixLog(path, line, method, message), type);
-        }
-
         public static void LogIn(string message, [CallerFilePath] string path = @"C:\Unknown.cs",
             [CallerLineNumber] int line = 0, [CallerMemberName] string method = "")
         {
-            var prefix = PrefixLog(path, line, method);
-
-            //ProcessLog($"{prefix} >>>>>>>>>> IN >>>>>>>>>>", LogType.Debug);
-
-            // Extra message to add?
-            //if (!string.IsNullOrWhiteSpace(message))
-            //    ProcessLog($"{prefix} {message}", LogType.Debug);
             EnsureLogger();
             message = $">>>>>>>>>> {message} >>>>>>>>>>";
             _log.Debug(message);
@@ -91,43 +67,18 @@ namespace AutoFramework.Helpers
             _log.Debug(message);
         }
 
-        public static void LogException(
-            Exception exception, LogType type = LogType.Error,
-            [CallerFilePath] string path = @"C:\Unknown.cs", [CallerLineNumber] int line = 0, [CallerMemberName] string method = "")
+        public static void LogException(Exception exception, [CallerFilePath] string path = @"C:\Unknown.cs",
+            [CallerLineNumber] int line = 0, [CallerMemberName] string method = "")
         {
+            EnsureLogger();
             string extraLogLevel = "[EXCEPTION]";
-            ProcessLog(PrefixLog(path, line, method, exception.Message, extraLogLevel), type);
+            _log.Error(PrefixLog(path, line, method, exception.Message, extraLogLevel));
             
             while (exception.InnerException != null)
             {
                 extraLogLevel = "[INNER EXCEPTION]";
                 exception = exception.InnerException;
-                ProcessLog(PrefixLog(path, line, method, exception.Message, extraLogLevel), type);
-            }
-        }
-
-        private static void ProcessLog(string message, LogType type)
-        {
-            EnsureLogger();
-
-            switch (type)
-            {
-                case LogType.Fatal:
-                    _log.Fatal(message);
-                    break;
-                case LogType.Error:
-                    _log.Error(message);
-                    break;
-                case LogType.Warn:
-                    _log.Warn(message);
-                    break;
-                case LogType.Info:
-                    _log.Info(message);
-                    break;
-                case LogType.Debug:
-                default:
-                    _log.Debug(message);
-                    break;
+                _log.Error(PrefixLog(path, line, method, exception.Message, extraLogLevel));
             }
         }
 
@@ -138,13 +89,6 @@ namespace AutoFramework.Helpers
             return $"{extraLogLevel} --> {file.Name}:{line} ({method}) --> {message}";
         }
 
-        private static string PrefixLog(string path, int line, string method)
-        {
-            var file = new FileInfo(path);
-
-            return $"{file.Name}:{line} ({method})";
-        }
-
         private static void EnsureLogger()
         {
             if (_log != null) return;
@@ -153,7 +97,6 @@ namespace AutoFramework.Helpers
             var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
             var configFile = GetConfigFile();
 
-            // Configure Log4Net
             XmlConfigurator.Configure(logRepository, configFile);
             _log = LogManager.GetLogger(assembly, assembly.ManifestModule.Name.Replace(".dll", "").Replace(".", " "));
         }
